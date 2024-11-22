@@ -5,6 +5,7 @@
       <LandingServices/>
       <LandingFeatures/>
       <LandingTopAirports/>
+      <LandingAbout/>
     </div>
 </template>
 
