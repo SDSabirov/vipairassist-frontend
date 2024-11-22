@@ -1,10 +1,10 @@
 <template>
     <nav class="bg-transparent fixed top-0 left-0 w-full bg-black z-50">
-      <div class="max-w-screen-lg mx-auto flex flex-col md:flex-row items-center justify-between text-white text-lg py-4">
+      <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between text-white text-xl py-4">
         <!-- Left Section: Navigation Links -->
         <div class="flex space-x-8 items-center">
           <a href="/">
-            <img src="/logo.svg" alt="Logo" class="h-14">
+            <img src="/logo.svg" alt="Logo" class="h-16">
           </a>
   
           <!-- Our Services Dropdown -->
@@ -53,9 +53,9 @@
           <a href="" class="hover:text-gray-400">Login</a>
           <a
             href=""
-            class="px-4 py-2 bg-white text-black hover:bg-gray-200 transition"
+            class="px-6 py-4 bg-white text-black hover:bg-gray-200 transition"
           >
-            Become a Member
+            Become a member
           </a>
         </div>
       </div>

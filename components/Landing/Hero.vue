@@ -1,5 +1,5 @@
 <template>
-    <section class="relative h-screen bg-black text-white">
+    <section class="relative h-screen bg-black text-white font-heading">
       <!-- Lazy Loaded Video -->
       <div class="absolute inset-0 z-0">
         <video
@@ -16,7 +16,7 @@
       </div>
   
       <!-- Hero Content -->
-      <div class="max-w-screen-lg relative z-10 flex flex-col items-center justify-center h-[70%] px-4 text-center mx-auto">
+      <div class="max-w-screen-xl relative z-10 flex flex-col items-center justify-center h-[70%] px-4 text-center mx-auto">
         <h1 class="text-4xl md:text-6xl ">
             Elevate Your Airport Experience with VIP Services Worldwide.
         </h1>
@@ -26,9 +26,10 @@
         <div class="mt-10">
           <a
             href="#services"
-            class="px-6 py-3 border border-white  text-white text-2xl leading-xl  hover:bg-blue-600 transition"
+            class="px-6 py-3 border border-white  text-white text-2xl leading-xl   transition bg-black/20 hover:text-black hover:bg-white hover:animate-fill-left-to-right"
+
           >
-           Book Your Service
+           Book Your Service Now
           </a>
         </div>
       </div>

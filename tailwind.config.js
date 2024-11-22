@@ -12,6 +12,19 @@ export default {
     extend: {
       fontFamily: {
         serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        heading: ['Libre Baskerville', 'serif'],
+      },
+      boxShadow: {
+        'glow': '0 0 10px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.4)'
+      },
+      keyframes: {
+        fillBlack: {
+          '0%': { left: '-100%' },
+          '100%': { left: '0' },
+        },
+      },
+      animation: {
+        'fill-left-to-right': 'fill 0.5s ease forwards',
       },
     },
   },
