@@ -3,7 +3,7 @@
       <div class="max-w-screen-xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 ">
         <!-- Contact Information -->
         <div class="col-span-2 text-[#FFEDD8] text-xl font-medium md:leading-[27px]">
-          <h3 class="text-2xl font-bold mb-4 leading-[182%]">VIP AIRASSIST</h3>
+          <h3 class="text-2xl font-bold mb-4 leading-[182%]">VIP AIR ASSIST</h3>
           <p>Tel: <a href="tel:+971506964878" class="hover:text-gray-300">+971506964878</a></p>
           <p>Email: <a href="mailto:info@vipairassist.com" class="hover:text-gray-300">info@vipairassist.com</a></p>
           <p class="mt-4">
