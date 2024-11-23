@@ -24,7 +24,7 @@ export default {
         },
       },
       animation: {
-        'fill-left-to-right': 'fill 0.5s ease forwards',
+        'fill-left-to-right': 'fill 1.5s ease forwards',
       },
     },
   },

@@ -2,7 +2,7 @@
   <section
     class="bg-white w-full flex flex-col justify-center items-center py-12"
   >
-    <div class="grid grid-cols-1 md:grid-cols-2 max-w-screen-xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 max-w-screen-xl justify-between">
       <div class="flex w-full h-full  overflow-hidden">
         <img
           src="/assets/images/backgrounds/about.webp"

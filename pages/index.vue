@@ -6,6 +6,8 @@
       <LandingFeatures/>
       <LandingTopAirports/>
       <LandingAbout/>
+      <testimonials/>
+      <Footer />
     </div>
 </template>
 

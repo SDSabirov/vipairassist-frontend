@@ -8,11 +8,11 @@
       />
         <h2 class="text-2xl md:text-6xl text-center font-medium leading-xl md:leading-4xl uppercas text-white my-4">Our Top Airports</h2>
         <div class="border bg-white w-1/6 h-2 mb-8"></div>
-      <div class="flex flex-col w-full mx-auto relative items-center justify-center">
+      <div class="flex flex-col w-full  relative items-center justify-center px-8 md:px-0">
         <!-- Left Arrow -->
         <button
           @click="prevSlide"
-          class="absolute top-1/2 left-14 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700 z-10"
+          class="absolute top-1/2 left-2 md:left-12 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700 z-10"
           :disabled="currentIndex === 0"
         >
           <i class="bx bx-chevron-left text-2xl"></i>
@@ -30,7 +30,7 @@
               class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4"
             >
               <!-- Card -->
-              <div class="h-[500px] flex flex-col bg-white shadow-glow">
+              <div class="h-[500px] flex flex-col bg-white rounded-xl overflow-hidden ">
                 <!-- Background Image (70%) -->
                 <div
                   class="h-[60%] bg-cover bg-center"
@@ -54,7 +54,7 @@
         <!-- Right Arrow -->
         <button
           @click="nextSlide"
-          class="absolute top-1/2 right-14 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700 z-10"
+          class="absolute top-1/2 right-2 md:right-12 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700 z-10"
           :disabled="currentIndex === maxIndex"
         >
           <i class="bx bx-chevron-right text-2xl"></i>

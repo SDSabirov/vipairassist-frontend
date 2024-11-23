@@ -24,13 +24,7 @@
           
         </p>
         <div class="mt-10">
-          <a
-            href="#services"
-            class="px-6 py-3 border border-white  text-white text-2xl leading-xl   transition bg-black/20 hover:text-black hover:bg-white hover:animate-fill-left-to-right"
-
-          >
-           Book Your Service Now
-          </a>
+          <ButtonsBookNow/>
         </div>
       </div>
   

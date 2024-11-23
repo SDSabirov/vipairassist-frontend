@@ -1,10 +1,15 @@
 <template>
-    <nav class="bg-transparent fixed top-0 left-0 w-full bg-black z-50">
-      <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between text-white text-xl py-4">
+    <nav
+      class="fixed top-0 left-0 w-full z-50 transition-all duration-500"
+      :class="{ 'bg-black shadow-lg': isScrolled, 'bg-transparent': !isScrolled }"
+    >
+      <div
+        class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between text-white text-xl py-4"
+      >
         <!-- Left Section: Navigation Links -->
         <div class="flex space-x-8 items-center">
           <a href="/">
-            <img src="/logo.svg" alt="Logo" class="h-16">
+            <img src="/logo.svg" alt="Logo" class="h-16" />
           </a>
   
           <!-- Our Services Dropdown -->
@@ -50,23 +55,22 @@
   
         <!-- Right Section: Login & Membership -->
         <div class="flex space-x-8 mt-4 md:mt-0 items-center">
-          <a href="" class="hover:text-gray-400">Login</a>
-          <a
-            href=""
-            class="px-6 py-4 bg-white text-black hover:bg-gray-200 transition"
-          >
-            Become a member
-          </a>
+          <ButtonsLogin />
+          <ButtonsMembership />
         </div>
       </div>
     </nav>
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted, onUnmounted } from "vue";
   
+  // State for dropdown visibility
   const isDropdownVisible = ref(false);
   let hideTimeout;
+  
+  // State for navigation bar scroll behavior
+  const isScrolled = ref(false);
   
   // Show the dropdown immediately
   const showDropdown = () => {
@@ -80,5 +84,18 @@
       isDropdownVisible.value = false;
     }, 300); // Adjust delay in milliseconds (e.g., 300ms)
   };
+  
+  // Handle scroll to update the navbar background
+  const handleScroll = () => {
+    isScrolled.value = window.scrollY > 10; // Change after 50px of scrolling
+  };
+  
+  // Add and remove event listeners for scrolling
+  onMounted(() => {
+    window.addEventListener("scroll", handleScroll);
+  });
+  onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll);
+  });
   </script>
   
