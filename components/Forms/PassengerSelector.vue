@@ -1,0 +1,140 @@
+<template>
+    <div class="relative w-full h-full">
+      <!-- Button to Open Dropdown -->
+      <button
+        @click="toggleDropdown"
+        class="flex items-center justify-between bg-gray-200 px-4 py-2 w-full h-full"
+      >
+        <span>{{ selectionSummary }}</span>
+        <span class="material-icons"><i class='bx bxs-down-arrow'></i></span>
+      </button>
+  
+      <!-- Dropdown -->
+      <div
+        v-if="isDropdownOpen"
+        class="absolute mt-2 w-full bg-white border rounded-md shadow-md z-50 p-4"
+      >
+        <!-- Adults -->
+        <div class="flex justify-between items-center mb-4">
+          <span>Adults</span>
+          <div class="flex items-center gap-2">
+            <button
+              class="px-3 py-1 bg-gray-200 rounded-full"
+              @click="decrement('adults')"
+              :disabled="adults === 1"
+            >
+              -
+            </button>
+            <span>{{ adults }}</span>
+            <button
+              class="px-3 py-1 bg-gray-200 rounded-full"
+              @click="increment('adults')"
+            >
+              +
+            </button>
+          </div>
+        </div>
+  
+        <!-- Children -->
+        <div class="flex justify-between items-center mb-4">
+          <span>Children</span>
+          <div class="flex items-center gap-2">
+            <button
+              class="px-3 py-1 bg-gray-200 rounded-md"
+              @click="decrement('children')"
+              :disabled="children === 0"
+            >
+              -
+            </button>
+            <span>{{ children }}</span>
+            <button
+              class="px-3 py-1 bg-gray-200 rounded-md"
+              @click="increment('children')"
+            >
+              +
+            </button>
+          </div>
+        </div>
+  
+        <!-- Infants -->
+        <div class="flex justify-between items-center mb-4">
+          <span>Infants</span>
+          <div class="flex items-center gap-2">
+            <button
+              class="px-3 py-1 bg-gray-200 rounded-md"
+              @click="decrement('infants')"
+              :disabled="infants === 0"
+            >
+              -
+            </button>
+            <span>{{ infants }}</span>
+            <button
+              class="px-3 py-1 bg-gray-200 rounded-md"
+              @click="increment('infants')"
+            >
+              +
+            </button>
+          </div>
+        </div>
+  
+        <!-- Apply Button -->
+        <button
+          @click="applySelection"
+          class="w-full bg-blue-500 text-white py-2 rounded-md"
+        >
+          Apply
+        </button>
+      </div>
+    </div>
+  </template>
+  
+  <script setup>
+  import { ref } from "vue";
+  
+  // State variables
+  const isDropdownOpen = ref(false);
+  const adults = ref(1); // Default to 1 adult
+  const children = ref(0);
+  const infants = ref(0);
+  
+  // Toggles dropdown visibility
+  function toggleDropdown() {
+    isDropdownOpen.value = !isDropdownOpen.value;
+  }
+  
+  // Increment function
+  function increment(type) {
+    if (type === "adults") adults.value++;
+    if (type === "children") children.value++;
+    if (type === "infants") infants.value++;
+  }
+  
+  // Decrement function
+  function decrement(type) {
+    if (type === "adults" && adults.value > 1) adults.value--;
+    if (type === "children" && children.value > 0) children.value--;
+    if (type === "infants" && infants.value > 0) infants.value--;
+  }
+  
+  // Generates summary string
+  const selectionSummary = computed(() => {
+    return `${adults.value} Adult${adults.value > 1 ? "s" : ""}, ${
+      children.value
+    } Child${children.value > 1 ? "ren" : ""}, ${
+      infants.value
+    } Infant${infants.value > 1 ? "s" : ""}`;
+  });
+  
+  // Apply selection (close dropdown)
+  function applySelection() {
+    isDropdownOpen.value = false;
+  }
+  </script>
+  
+  <style scoped>
+  .material-icons {
+    font-family: "Material Icons";
+    font-size: 18px;
+  }
+  </style>
+  

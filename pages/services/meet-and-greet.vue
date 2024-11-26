@@ -44,7 +44,16 @@
           </p>
         </div>
       </div>
+      
     </section>
+    <div class="flex flex flex-col items-center justify-center w-full py-10">
+      <div class="max-w-screen-xl flex flex-col items-center w-full space-y-6">
+        <h4 class="uppercase text-2xl md:text-4xl font-medium text-6 md:leading-8 mb-6">Start Your Booking</h4>
+        <FormsBaseService/>
+      </div>
+      
+    </div>
+    <Footer />
   </div>
 </template>
 

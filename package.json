@@ -12,7 +12,9 @@
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/seo": "^2.0.0-rc.23",
+    "axios": "^1.7.7",
     "boxicons": "^2.1.4",
+    "flowbite": "^2.5.2",
     "nuxt": "^3.14.1592",
     "nuxt-gtag": "^3.0.2",
     "vue": "latest",
