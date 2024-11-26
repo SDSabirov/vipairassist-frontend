@@ -3,7 +3,9 @@
       <!-- Button to Open Dropdown -->
       <button
         @click="toggleDropdown"
-        class="flex items-center justify-between bg-gray-200 px-4 py-2 w-full h-full"
+        type="button"
+        class="flex items-center border border-black justify-between bg-gray-200 px-4 py-2 w-full h-full"
+    
       >
         <span>{{ selectionSummary }}</span>
         <span class="material-icons"><i class='bx bxs-down-arrow'></i></span>
@@ -12,7 +14,7 @@
       <!-- Dropdown -->
       <div
         v-if="isDropdownOpen"
-        class="absolute mt-2 w-full bg-white border rounded-md shadow-md z-50 p-4"
+        class="absolute mt-2 w-full bg-gray-300 border  shadow-md z-50 p-4"
       >
         <!-- Adults -->
         <div class="flex justify-between items-center mb-4">
@@ -40,7 +42,7 @@
           <span>Children</span>
           <div class="flex items-center gap-2">
             <button
-              class="px-3 py-1 bg-gray-200 rounded-md"
+              class="px-3 py-1 bg-gray-200 rounded-full"
               @click="decrement('children')"
               :disabled="children === 0"
             >
@@ -48,7 +50,7 @@
             </button>
             <span>{{ children }}</span>
             <button
-              class="px-3 py-1 bg-gray-200 rounded-md"
+              class="px-3 py-1 bg-gray-200 rounded-full"
               @click="increment('children')"
             >
               +
@@ -61,7 +63,7 @@
           <span>Infants</span>
           <div class="flex items-center gap-2">
             <button
-              class="px-3 py-1 bg-gray-200 rounded-md"
+              class="px-3 py-1 bg-gray-200 rounded-full"
               @click="decrement('infants')"
               :disabled="infants === 0"
             >
@@ -69,7 +71,7 @@
             </button>
             <span>{{ infants }}</span>
             <button
-              class="px-3 py-1 bg-gray-200 rounded-md"
+              class="px-3 py-1 bg-gray-200 rounded-full"
               @click="increment('infants')"
             >
               +
@@ -80,7 +82,8 @@
         <!-- Apply Button -->
         <button
           @click="applySelection"
-          class="w-full bg-blue-500 text-white py-2 rounded-md"
+          type="button"
+          class="w-full bg-black text-white py-2 rounded-sm"
         >
           Apply
         </button>

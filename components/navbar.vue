@@ -18,10 +18,10 @@
             @mouseenter="showDropdown"
             @mouseleave="hideDropdownWithDelay"
           >
-            <button class="hover:text-gray-400 flex items-center gap-1">
+            <a href="/services" class="hover:text-gray-400 flex items-center gap-1">
               Our Services
               <i class="bx bx-chevron-down text-lg"></i>
-            </button>
+            </a>
             <!-- Dropdown Menu -->
             <div
               v-if="isDropdownVisible"
@@ -31,19 +31,19 @@
                 href="/services/meet-and-greet"
                 class="block px-4 py-2 text-white hover:bg-gray-600 whitespace-nowrap"
               >
-                Meet & Greet
+                Meet & Greet, Fast Track
               </a>
               <a
-                href="/services/fast-track"
+                href="/services/private-vip-terminal"
                 class="block px-4 py-2 text-white hover:bg-gray-600 whitespace-nowrap"
               >
-                Fast Track
+              Private VIP Terminal
               </a>
               <a
-                href="/services/private-vip"
+                href="/services/chauffer"
                 class="block px-4 py-2 text-white hover:bg-gray-600 whitespace-nowrap"
               >
-                Private VIP Terminal
+                Chauffer Services
               </a>
             </div>
           </div>

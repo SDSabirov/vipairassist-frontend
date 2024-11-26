@@ -8,7 +8,7 @@
     />
     <div class="absolute top-0 flex flex-col w-full h-full items-center justify-center">
         <h2 class="text-4xl md:text-6xl text-white">
-            Meet & Greet, Fast Track
+            {{ page }}
         </h2>
         <div class="mt-10">
             <ButtonsBookNow />
