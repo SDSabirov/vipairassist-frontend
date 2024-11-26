@@ -18,8 +18,7 @@
           >+971506964878</a
         >
       </div>
-      <div
-        class="flex flex-col p-4 items-center justify-center space-y-4 text-6xl"
+      <div class="flex flex-col p-4 items-center justify-center space-y-4 "
       >
         <i class="bx bxs-map-pin bx-lg"></i>
         <p>
@@ -27,7 +26,7 @@
           Hamra Industrial Zone-FZ, Ras Al Khaimah, United Arab Emirates
         </p>
       </div>
-      
+
     </div>
   </section>
 </template>
