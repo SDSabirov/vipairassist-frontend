@@ -11,17 +11,15 @@
           <FormsTimepicker />
         </div>
         <div class="relative h-[62px]">
-            <!-- Input Field -->
-            <input
-              type="text"
-              placeholder="Flight Number"
-              class="w-full h-full p-3 bg-gray-200 text-gray-600 text-sm focus:outline-none focus:ring focus:ring-black"
-            />
-            <!-- Suggestions Dropdown -->
-            
-          </div>
+          <!-- Input Field -->
+          <input
+            type="text"
+            placeholder="Flight Number"
+            class="w-full h-full p-3 bg-gray-200 text-gray-600 text-sm focus:outline-none focus:ring focus:ring-black"
+          />
+        </div>
         <div class="flex w-full h-[62px]">
-            <FormsPassengerSelector/>
+          <FormsPassengerSelector />
         </div>
       </div>
       <div class="flex w-full items-center justify-center py-10">
