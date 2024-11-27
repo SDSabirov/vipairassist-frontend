@@ -4,7 +4,7 @@
     <div class="flex flex-col w-full bg-white p-4 space-y-6 px-4 md:px-16">
       <p class="text-lg text-gray-400">I am booking a service for</p>
       <ButtonsBookingType />
-      <FormsBookingStep1 />
+      <FormsTransitForm />
       <div class="flex items-center justify-center py-6">
         <button
           class="relative px-12 py-6 text-black border border-black text-2xl leading-[108%] group overflow-hidden"

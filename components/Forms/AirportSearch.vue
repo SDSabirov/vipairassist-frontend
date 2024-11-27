@@ -13,7 +13,7 @@
         <!-- Suggestions Dropdown -->
         <ul
           v-if="airports.length > 0"
-          class="absolute left-0 right-0 bg-white border border-gray-300 rounded-sm mt-1 max-h-60 overflow-y-auto z-10"
+          class="absolute left-0 right-0 bg-white border border-gray-300 rounded-sm mt-1 max-h-60 overflow-y-auto z-20"
         >
           <li
             v-for="(airport, index) in airports"
