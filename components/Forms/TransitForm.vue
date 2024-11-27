@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col space-y-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+  <div class="flex flex-col w-full space-y-6  ">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full ">
       <!--Name-->
-      <div class="relative h-[62px]">
+      <div class="relative h-[62px] w-full">
         <!-- Input Field -->
         <label for="name" class="absolute -top-2 bg-white px-2 text-sm"
           >Full Name</label
@@ -15,7 +15,7 @@
       </div>
 
       <!--Email-->
-      <div class="relative h-[62px]">
+      <div class="relative h-[62px] w-full">
         <label for="email" class="absolute -top-2 bg-white px-2 text-sm"
           >Email</label
         >
@@ -27,7 +27,7 @@
       </div>
 
       <!--Phone-->
-      <div class="relative h-[62px]">
+      <div class="relative h-[62px] w-full">
         <label for="phone" class="absolute -top-2 bg-white px-2 text-sm"
           >Phone</label
         >
@@ -47,7 +47,7 @@
       </div>
 
       <!--Number of Bags-->
-      <div class="relative h-[62px]">
+      <div class="relative h-[62px] w-full">
         <!-- Input Field -->
         <label for="bags" class="absolute -top-2 bg-white px-2 text-sm"
           >Number of bags</label
@@ -63,7 +63,7 @@
 
     <div class="flex items-center py-4">
         <div class="border border-black w-full"></div>
-        <h4 class="text-md font-normal leading-6 w-full text-center">Your Departure Details</h4>
+        <h4 class="text-md font-normal leading-6 w-full text-center">Departure Details</h4>
         <div class="border border-black w-full"></div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
@@ -101,7 +101,7 @@
 
     <div class="flex items-center py-4">
         <div class="border border-black w-full"></div>
-        <h4 class="text-md font-normal leading-6 w-full text-center">Your Departure Details</h4>
+        <h4 class="text-md font-normal leading-6 w-full text-center">Arrival Details</h4>
         <div class="border border-black w-full"></div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">

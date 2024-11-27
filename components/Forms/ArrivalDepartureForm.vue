@@ -1,5 +1,6 @@
 
 <template>
+  <div class="flex flex-col w-full items-center justify-center">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
         <!--Name-->
         <div class="relative h-[62px]">
@@ -87,6 +88,8 @@
         
     
     </div>
+  </div>
+    
 </template>
 
 <script setup lang="ts">
