@@ -1,10 +1,12 @@
 <template>
   <div class="flex flex-col max-w-screen-xl w-full bg-white shadow-xl">
-    <ButtonsBookingSteps />
+    <ButtonsBookingSteps v-model="currentStep" />
     <div class="flex flex-col w-full bg-white p-4 space-y-6 px-4 md:px-16">
       <p class="text-lg text-gray-400">I am booking a service for</p>
-      <ButtonsBookingType />
-      <FormsTransitForm />
+      <ButtonsBookingType v-model="bookingType" />
+
+      <FormsTransitForm v-if="bookingType === 'Transit'" />
+      <FormsArrivalDepartureForm v-else />
       <div class="flex items-center justify-center py-6">
         <button
           class="relative px-12 py-6 text-black border border-black text-2xl leading-[108%] group overflow-hidden"
@@ -22,17 +24,10 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup>
-import { ref } from "vue";
 
-// Track the current step
 const currentStep = ref(1);
-
-// Function to change the step
-const changeStep = (step) => {
-  currentStep.value = step;
-};
+const bookingType = ref("Arrival");
 </script>
