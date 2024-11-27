@@ -4,14 +4,16 @@
     >
       <img
         :src="src"
-        alt="Service Image"
+        alt="Blog Image"
         class="h-full w-full object-cover object-top"
       />
+      <!--Overlay-->
+      <div class="w-full h-full absolute top-0 bg-black/60"></div>
       <div
         class="absolute top-0 flex flex-col w-full h-full items-center justify-center"
       >
         <h2 class="text-4xl md:text-6xl text-white">
-          {{page}}
+          Our Blog
         </h2>
         
       </div>

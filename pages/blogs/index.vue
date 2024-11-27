@@ -17,10 +17,10 @@
           </div>
 
           <div class="flex flex-col space-y-6">
-            <h3 class="text-lg font-semibold leading-[180%]">
+            <h3 class="text-xl font-semibold leading-[180%]">
               {{blog.title}}
             </h3>
-            <p class="font-medium text-md leading-[110%]">
+            <p class="font-medium text-lg leading-7 mt-6">
               {{blog.short}}
             </p>
             <div class="flex w-full">
@@ -44,28 +44,27 @@ import Navbar from "~/components/navbar.vue";
 
 const page = "Our Blogs";
 
-const blog1link = "/services"
 
 const blogs = [
     {title: "The Art of Seamless Travel: How VIP Airport Services RedefineLuxury",
-     short:"In today’s fast-paced world, time and convenience have become theultimate luxuries. For discerning travelers, the airportexperience often sets the tone for their entire journey...",
+     short:"In today’s fast-paced world, time and convenience have become theultimate luxuries. For discerning travelers, the airportexperience...",
      image:image1,
-     link:"the-art-of-seamless-travel"
+     link:"/blogs/the-art-of-seamless-travel"
     },
     {title: "Behind the Curtain: A Day in the Life of a VIP Airport Assistant",
      short:"The luxury of VIP airport services may feel effortless to the traveler, but behind the scenes, there’s a dedicated team working...",
      image:image2,
-     link:"the-art-of-seamless-travel"
+     link:"/blogs/behind-the-curtain"
     },
     {title: "Stress-Free Family Travel: VIP Services Tailored for Families",
-     short:"Traveling with young children can be a challenge, even for the most seasoned parents. Between managing luggage, navigating security, and keeping little ones ...",
+     short:"Traveling with young children can be a challenge, even for the most seasoned parents. Between managing luggage, navigating security, a ...",
      image:image3,
-     link:"the-art-of-seamless-travel"
+     link:"/blogs/stress-free-family-travel"
     },
     {title: "The Best Winter Travel Destinations for Luxury Seekers",
      short:"Winter is a time of transformation. As snow blankets the landscape, the world’s most luxurious travel destinations become havens for those seeking...",
      image:image4,
-     link:"the-art-of-seamless-travel"
+     link:"/blogs/the-best-winter-travel"
     },
 ]
 </script>
