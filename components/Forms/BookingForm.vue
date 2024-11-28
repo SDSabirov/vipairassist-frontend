@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col max-w-screen-xl w-full bg-white shadow-xl">
     <ButtonsBookingSteps v-model="currentStep" />
-    <div class="flex flex-col w-full bg-white p-4 space-y-6 px-4 md:px-16">
+    <div class="flex flex-col w-full bg-white p-4 space-y-6 px-4 md:px-16 md:py-12">
       
     
       <!--step 1-->
@@ -13,8 +13,11 @@
       </div>
 
       <!--Step 2 -->
-      <div v-if="currentStep===2">
+      <div v-if="currentStep===2" class="w-full">
         <FormsServiceSelect />
+      </div>
+      <div v-if="currentStep===3" class="w-full">
+        <FormsSummary />
       </div>
       <div class="flex items-center justify-center py-6">
         <button

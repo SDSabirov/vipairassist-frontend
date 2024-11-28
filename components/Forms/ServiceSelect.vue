@@ -93,11 +93,13 @@
             Extra Services added
           </h3>
 
-          <div class="grid grid-cols-2 gap-2 mt-2">
+          <div class="grid grid-cols-3 gap-2 mt-2">
             <p class="text-md leading-6 text-gray-700">Chauffer</p>
             <p>1</p>
+            <p>20 USD</p>
             <p class="text-md leading-6 text-gray-700">Porter</p>
             <p>1</p>
+            <p>20 USD</p>
           </div>
         </div>
         <!--Select Button-->
