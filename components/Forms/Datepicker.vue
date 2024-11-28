@@ -16,6 +16,8 @@
       </svg>
     </div>
     <input
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
       id="datepicker-actions"
       datepicker
       datepicker-buttons
@@ -29,6 +31,9 @@
 
 <script setup>
 import { useFlowbite } from '~/composables/useFlowbite';
+defineProps(["modelValue"]);
+const emit = defineEmits(["update:modelValue"]);
+
 onMounted(() => {
     useFlowbite(() => {
         initFlowbite();
