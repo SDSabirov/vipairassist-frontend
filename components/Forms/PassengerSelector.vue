@@ -92,47 +92,74 @@
   </template>
   
   <script setup>
-  import { ref } from "vue";
-  
-  // State variables
-  const isDropdownOpen = ref(false);
-  const adults = ref(1); // Default to 1 adult
-  const children = ref(0);
-  const infants = ref(0);
-  
-  // Toggles dropdown visibility
-  function toggleDropdown() {
-    isDropdownOpen.value = !isDropdownOpen.value;
+import { ref, computed } from "vue";
+import { useBookingStore } from "@/stores/booking";
+
+const bookingStore = useBookingStore();
+
+// State variables
+const isDropdownOpen = ref(false);
+const adults = ref(bookingStore.formData.step1.adults || 1); // Default to 1 adult
+const children = ref(bookingStore.formData.step1.children || 0);
+const infants = ref(bookingStore.formData.step1.infants || 0);
+
+// Toggles dropdown visibility
+function toggleDropdown() {
+  isDropdownOpen.value = !isDropdownOpen.value;
+}
+
+// Increment function
+function increment(type) {
+  if (type === "adults") {
+    adults.value++;
+    bookingStore.formData.step1.adults = adults.value;
   }
-  
-  // Increment function
-  function increment(type) {
-    if (type === "adults") adults.value++;
-    if (type === "children") children.value++;
-    if (type === "infants") infants.value++;
+  if (type === "children") {
+    children.value++;
+    bookingStore.formData.step1.children = children.value;
   }
-  
-  // Decrement function
-  function decrement(type) {
-    if (type === "adults" && adults.value > 1) adults.value--;
-    if (type === "children" && children.value > 0) children.value--;
-    if (type === "infants" && infants.value > 0) infants.value--;
+  if (type === "infants") {
+    infants.value++;
+    bookingStore.formData.step1.infants = infants.value;
   }
-  
-  // Generates summary string
-  const selectionSummary = computed(() => {
-    return `${adults.value} Adult${adults.value > 1 ? "s" : ""}, ${
-      children.value
-    } Child${children.value > 1 ? "ren" : ""}, ${
-      infants.value
-    } Infant${infants.value > 1 ? "s" : ""}`;
-  });
-  
-  // Apply selection (close dropdown)
-  function applySelection() {
-    isDropdownOpen.value = false;
+}
+
+// Decrement function
+function decrement(type) {
+  if (type === "adults" && adults.value > 1) {
+    adults.value--;
+    bookingStore.formData.step1.adults = adults.value;
   }
-  </script>
+  if (type === "children" && children.value > 0) {
+    children.value--;
+    bookingStore.formData.step1.children = children.value;
+  }
+  if (type === "infants" && infants.value > 0) {
+    infants.value--;
+    bookingStore.formData.step1.infants = infants.value;
+  }
+}
+
+// Generates summary string
+const selectionSummary = computed(() => {
+  return `${adults.value} Adult${adults.value > 1 ? "s" : ""}, ${
+    children.value
+  } Child${children.value > 1 ? "ren" : ""}, ${
+    infants.value
+  } Infant${infants.value > 1 ? "s" : ""}`;
+});
+
+// Apply selection (close dropdown)
+function applySelection() {
+  // Update booking store with final values
+  bookingStore.formData.step1.adults = adults.value;
+  bookingStore.formData.step1.children = children.value;
+  bookingStore.formData.step1.infants = infants.value;
+
+  // Close dropdown
+  isDropdownOpen.value = false;
+}
+</script>
   
   <style scoped>
   .material-icons {

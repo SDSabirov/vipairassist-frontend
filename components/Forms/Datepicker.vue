@@ -18,10 +18,8 @@
     <input
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
+      ref="datepickerInput"
       id="datepicker-actions"
-      datepicker
-      datepicker-buttons
-      datepicker-autoselect-today
       type="text"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-black block w-full ps-10 p-2.5"
       placeholder="Select date"
@@ -30,13 +28,27 @@
 </template>
 
 <script setup>
-import { useFlowbite } from '~/composables/useFlowbite';
+import { ref, onMounted } from "vue";
+import { useFlowbite } from "~/composables/useFlowbite";
+
+// Props and Emit
 defineProps(["modelValue"]);
 const emit = defineEmits(["update:modelValue"]);
 
+// Refs
+const datepickerInput = ref(null);
+
+// Flowbite Datepicker Initialization
 onMounted(() => {
-    useFlowbite(() => {
-        initFlowbite();
-    })
-})
+  useFlowbite(() => {
+    const datepicker = new Datepicker(datepickerInput.value, {
+      autohide: true, // Optional: Auto-hide on date select
+    });
+
+    // Sync Flowbite Datepicker value with v-model
+    datepickerInput.value.addEventListener("changeDate", (e) => {
+      emit("update:modelValue", e.target.value);
+    });
+  });
+});
 </script>

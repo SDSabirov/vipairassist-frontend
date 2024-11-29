@@ -7,9 +7,12 @@
       <!--step 1-->
       <div v-if="bookingStore.currentStep===1" class="w-full" >
         <p class="text-lg text-gray-400 mb-4">I am booking a service for</p>
-        <ButtonsBookingType v-model="bookingStore.bookingType" class="mb-6"/>
+        <form @submit.prevent="handleStep1Submit">
+          <ButtonsBookingType v-model="bookingStore.bookingType" class="mb-6"/>
         <FormsTransitForm v-if="bookingStore.bookingType === 'Transit'" v-model="bookingStore.data"/>
         <FormsArrivalDepartureForm v-else v-model="bookingStore.data"/>
+        </form>
+        
       </div>
 
       <!--Step 2 -->
@@ -21,7 +24,7 @@
       </div>
       <div class="flex items-center justify-center py-6" v-if="bookingStore.currentStep==1">
         <button
-          @click="bookingStore.nextStep"
+          @click="handleStep1Submit()"
           class="relative px-12 py-6 text-black border border-black text-2xl leading-[108%] group overflow-hidden"
         >
           <span
@@ -75,5 +78,14 @@ import { useBookingStore } from '@/stores/booking';
 
 const bookingStore = useBookingStore();
 
+const handleStep1Submit = async () => {
+  const isValid = bookingStore.validateStep(1);
+  if (!isValid) {
+    console.log("Validation failed for Step 1");
+    return;
+  }
 
+  await bookingStore.submitStep1();
+  bookingStore.nextStep();
+};
 </script>

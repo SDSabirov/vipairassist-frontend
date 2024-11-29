@@ -40,21 +40,18 @@
           <div class="grid grid-cols-3 gap-6">  
             <p class="text-md leading-7 col-span-2">Adults (12+ years)</p>
             <p>1</p>
-            <p class="col-span-2">Saidmurod Sabirov</p>
-            <i class='bx bx-edit' ></i>
+            
           </div>
           <div class="grid grid-cols-3 gap-6 items-center justify-center">  
             <p class="text-md leading-7 col-span-2">Children (2-11 years)</p>
             <p>1</p>
-            <p class="col-span-2">Saidmurod Sabirov</p>
-            <i class='bx bx-edit' ></i>
+            
           </div>
           <div class="grid grid-cols-3 gap-6">  
             <p class="text-md leading-7 col-span-2">Infants (0-2 years)</p>
-            <p>1</p>
-            <p class="col-span-2">Saidmurod Sabirov</p>
-            <i class='bx bx-edit' ></i>
+            <p>1</p>  
           </div>
+          <FormsPassengerInput />
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ type Airport = {
 type Passenger = { name: string; age: number };
 
 type Step1Data = {
+  bookingType:string;
   name: string;
   email: string;
   phone: string;
@@ -28,6 +29,7 @@ type Step1Data = {
   flightSecondary?: string;
   dateSecondary?: string;
   timeSecondary?: string;
+  discountType:string;
 };
 
 type Step2Data = {
@@ -53,15 +55,16 @@ const defaultAirport: Airport = {
 };
 
 const defaultStep1Data: Step1Data = {
+  bookingType:'',
   name: "",
   email: "",
   phone: "",
   airport: defaultAirport,
   flight: "",
-  adults: null,
-  children: null,
-  infants: null,
-  numberOfBags: null,
+  adults: 1,
+  children: 0,
+  infants: 0,
+  numberOfBags: 0,
   date: "",
   time: "",
   extraRequest: "",
@@ -69,6 +72,7 @@ const defaultStep1Data: Step1Data = {
   flightSecondary: "",
   dateSecondary: "",
   timeSecondary: "",
+  discountType:"None",
 };
 
 // Pinia Store Definition
@@ -110,6 +114,7 @@ export const useBookingStore = defineStore("booking", {
     // Booking Type Management
     setBookingType(type: string) {
       this.bookingType = type;
+      
     },
 
     // Update Form Data
@@ -173,9 +178,23 @@ export const useBookingStore = defineStore("booking", {
     // API Submission Logic
     async submitStep1() {
       this.loading = true;
+      this.formData.step1.bookingType=this.bookingType
+      let date= this.formData.step1.date
+      const d = typeof date === "string" ? new Date(date) : date;
+
+      if (isNaN(d.getTime())) {
+        console.error("Invalid date provided to formatDate");
+        return "";
+      }
+    
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      this.formData.step1.date = `${year}-${month}-${day}`
       try {
-        const response = await axios.post("/api/step1", this.formData.step1);
+        const response = await axios.post("http://127.0.0.1:8000/api/v1/create-booking-step1/", this.formData.step1);
         console.log("Step 1 submitted successfully:", response.data);
+        
       } catch (error) {
         this.error = "Failed to submit Step 1.";
         console.error(error);

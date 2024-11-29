@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col w-full items-center justify-center">
-    <form>
+
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
         <!-- Full Name -->
         <div class="relative h-[62px]">
@@ -98,7 +98,7 @@
           />
         </div>
       </div>
-    </form>
+   
   </div>
 </template>
 

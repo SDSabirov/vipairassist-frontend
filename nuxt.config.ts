@@ -7,7 +7,8 @@ export default defineNuxtConfig({
     "@": resolve(__dirname),
     "~": resolve(__dirname),
   },
-  modules: ['@nuxtjs/seo', 'nuxt-gtag','@pinia/nuxt','@nuxtjs/google-fonts'],
+  modules: ['@nuxtjs/seo', 'nuxt-gtag','@pinia/nuxt','@nuxtjs/google-fonts',],
+  
   googleFonts: {
     families: {
       'Playfair+Display': [400, 500, 700],
