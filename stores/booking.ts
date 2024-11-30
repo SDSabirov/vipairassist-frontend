@@ -81,6 +81,7 @@ export const useBookingStore = defineStore("booking", {
   state: () => ({
     currentStep: 1,
     bookingType: "Arrival",
+    bookingReference:"",
     formData: {
       step1: { ...defaultStep1Data },
       step2: { services: [] },
@@ -191,8 +192,12 @@ export const useBookingStore = defineStore("booking", {
       const month = String(d.getMonth() + 1).padStart(2, "0");
       const day = String(d.getDate()).padStart(2, "0");
       this.formData.step1.date = `${year}-${month}-${day}`
+      axios.defaults.xsrfCookieName = "csrftoken";
+      axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
       try {
         const response = await axios.post("http://127.0.0.1:8000/api/v1/create-booking-step1/", this.formData.step1);
+        this.bookingReference = response.data.booking_reference;
+        console.log("Booking Reference:", this.bookingReference);
         console.log("Step 1 submitted successfully:", response.data);
         
       } catch (error) {

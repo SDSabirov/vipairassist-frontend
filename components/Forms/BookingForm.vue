@@ -79,13 +79,24 @@ import { useBookingStore } from '@/stores/booking';
 const bookingStore = useBookingStore();
 
 const handleStep1Submit = async () => {
-  const isValid = bookingStore.validateStep(1);
-  if (!isValid) {
-    console.log("Validation failed for Step 1");
-    return;
-  }
+  try {
+    const isValid = bookingStore.validateStep(1);
+    if (!isValid) {
+      console.error("Validation failed for Step 1:", bookingStore.errors);
+      return;
+    }
 
-  await bookingStore.submitStep1();
-  bookingStore.nextStep();
+    bookingStore.loading = true;
+    await bookingStore.submitStep1();
+    console.log("Step 1 submitted successfully");
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    bookingStore.nextStep();
+  } catch (error) {
+    console.error("Error during Step 1 submission:", error);
+  } finally {
+    bookingStore.loading = false;
+  }
 };
 </script>

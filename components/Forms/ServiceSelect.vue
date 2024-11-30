@@ -2,34 +2,13 @@
 
 <template>
   <div class="w-full h-full mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 border border-black">
+    <div v-for="service,index in services" :key="index" class="grid grid-cols-1 md:grid-cols-3 border border-black">
       <!--Description i.e left side-->
       <div class="col-span-2 flex flex-col px-6 py-8">
-        <h2 class="text-2xl leading-7">Meet&Greet Fast Track</h2>
+        <h2 class="text-2xl leading-7">{{service.name}}</h2>
         <ul class="mt-5 list-disc px-[12px] space-y-4">
-          <li class="text-lg leading-6 text-[#858383]">
-            Personalized Meet and Greet: Our agent will monitor the status of
-            your flight and will be waiting for you with a sign board at the end
-            of the airbridge, at immigration, or at the entrance of the terminal
-            (depending on aircraft parking position), before passport control
-            and customs.
-          </li>
-          <li class="text-lg leading-6 text-[#858383]">
-            Expedited Passport Control and Customs: The agent will fast-track
-            through immigration and security.
-          </li>
-          <li class="text-lg leading-6 text-[#858383]">
-            The agent will escort you to the baggage claim hall and help with
-            retrieval of your bags
-          </li>
-          <li class="text-lg leading-6 text-[#858383]">
-            Seamless Baggage Claim Assistance: Porter services can be
-            prearranged in case if any help with carrying baggage is needed.
-          </li>
-          <li class="text-lg leading-6 text-[#858383]">
-            Arrival Hall or Driver Connection: You will be accommodated at the
-            arrival hall or to your driver (the meeting point will be
-            prearranged with your driver beforehand)
+          <li v-for="line,index in service.description.split('\n')" :key="index" class="text-lg leading-6 text-[#858383]">
+            {{line}}
           </li>
         </ul>
         <FormsExtraServicesSelect />
@@ -44,7 +23,7 @@
             Adults (12+ years)
           </h3>
           <ul class="list-disc px-8">
-            <li>420.00</li>
+            <li>{{ service.prices[0].first_passenger_price }}</li>
           </ul>
         </div>
         <div class="flex flex-col">
@@ -52,7 +31,7 @@
             Each subsequent passenger
           </h3>
           <ul class="list-disc px-8">
-            <li>420.00</li>
+            <li>{{ service.prices[0].adult_price }}</li>
           </ul>
         </div>
         <div class="flex flex-col">
@@ -60,7 +39,8 @@
             Children (2-11 years)
           </h3>
           <ul class="list-disc px-8">
-            <li>Free</li>
+            <li v-if="service.prices[0].child_price>0">{{ service.prices[0].child_price }}</li>
+            <li v-else>Free</li>
           </ul>
         </div>
         <div class="flex flex-col border-b-2 border-b-black pb-4">
@@ -68,10 +48,11 @@
             Infants (0-2 years)
           </h3>
           <ul class="list-disc px-8">
-            <li>Free</li>
+            <li v-if="service.prices[0].infant_price>0">{{ service.prices[0].child_price }}</li>
+            <li v-else>Free</li>
           </ul>
         </div>
-        <h2 class="text-2xl leading-7 pt-4">420 USD</h2>
+        <h2 class="text-2xl leading-7 pt-4">Price {{ service.total_price }} USD</h2>
         <!--Total Price-->
         <div class="flex flex-col">
           <h3 class="mt-5 text-md leading-[157%] text-gray-500">
@@ -80,11 +61,13 @@
 
           <div class="grid grid-cols-2 gap-2 mt-2">
             <p class="text-md leading-6 text-gray-700">Adults(12+ years)</p>
-            <p>1</p>
-            <p class="text-md leading-6 text-gray-700">Children</p>
-            <p>1</p>
+            <p>{{bookingStore.formData.step1.adults}}</p>
+            <p v-if="bookingStore.formData.step1.children>0" class="text-md leading-6 text-gray-700">Children(2-11 years)</p>
+            <p  v-if="bookingStore.formData.step1.children>0">{{bookingStore.formData.step1.children}}</p>
+            <p  v-if="bookingStore.formData.step1.infants>0" class="text-md leading-6 text-gray-700">Infants (0-2 years)</p>
+            <p v-if="bookingStore.formData.step1.infants>0">{{bookingStore.formData.step1.infants}}</p>
             <p class="text-md leading-6 text-gray-700">Total passengers</p>
-            <p>1</p>
+            <p>{{bookingStore.formData.step1.adults + bookingStore.formData.step1.children + bookingStore.formData.step1.infants}}</p>
           </div>
         </div>
         <!--Extras-->
@@ -122,3 +105,41 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { useBookingStore } from "@/stores/booking";
+import axios from "axios";
+import { onMounted, ref } from "vue";
+
+const bookingStore = useBookingStore();
+let services = ref([]);
+let terms_and_conditions = ref(null);
+async function getServices(airport, type, bookingReference) {
+  try {
+    const response = await axios.get(
+      "http://127.0.0.1:8000/api/v1/airports/" +
+        airport +
+        "/services/" +
+        type +
+        "/" +
+        bookingReference +
+        "/"
+    );
+    services.value = response.data.services;
+    // extras.value = response.data.extra_services;
+    // specials.value = response.data.extra_services_special;
+    // exlusives.value = response.data.extra_services_exclusive;
+    terms_and_conditions = response.data.terms_and_conditions;
+  } catch (error) {
+    console.log(error);
+  }
+}
+onMounted(() => {
+  console.log(services);
+  getServices(
+    bookingStore.formData.step1.airport.name,
+    bookingStore.bookingType,
+    bookingStore.bookingReference
+  );
+});
+</script>
