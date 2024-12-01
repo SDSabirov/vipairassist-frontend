@@ -45,11 +45,13 @@ type Step1Data = {
 };
 
 type Step2Data = {
+  bookingReference:string;
   services: Service[];
   extras:ExtraService[];
 };
 
 type Step3Data = {
+  bookingReference:string;
   passengers: Passenger[];
 };
 
@@ -95,6 +97,8 @@ export const useBookingStore = defineStore("booking", {
     currentStep: 1,
     bookingType: "Arrival",
     bookingReference:"",
+    totalPrice:0, //value used in step 3 
+    extrasTotal:0, //value used in step 3
     formData: {
       step1: { ...defaultStep1Data },
       step2: { services: [],extras : [] },
@@ -151,6 +155,9 @@ export const useBookingStore = defineStore("booking", {
     resetBooking() {
       this.currentStep = 1;
       this.bookingType = "Arrival";
+      this.bookingReference = "";
+      this.totalPrice = 0;
+      this.extrasTotal = 0;
       this.formData = {
         step1: { ...defaultStep1Data },
         step2: { services: [] },
@@ -232,8 +239,11 @@ export const useBookingStore = defineStore("booking", {
     async submitStep2() {
       this.loading = true;
       try {
-        const response = await axios.post("/api/step2", this.formData.step2);
-        console.log("Step 2 submitted successfully:", response.data);
+        this.formData.step2.bookingReference = this.bookingReference
+        const response = await axios.post("http://127.0.0.1:8000/api/v1/create-booking-step2/", this.formData.step2);
+        this.totalPrice = response.data.total_price;
+        this.extrasTotal = response.data.extras_total;
+
       } catch (error) {
         this.error = "Failed to submit Step 2.";
         console.error(error);
@@ -245,11 +255,9 @@ export const useBookingStore = defineStore("booking", {
     async submitFinalStep() {
       this.loading = true;
       try {
-        const response = await axios.post("/api/final", {
-          ...this.formData.step1,
-          ...this.formData.step2,
-          ...this.formData.step3,
-        });
+        this.formData.step3.bookingReference = this.bookingReference
+        const response = await axios.post("http://127.0.0.1:8000/api/v1/create-booking-step3/", this.formData.step3,
+        );
         console.log("Booking completed successfully:", response.data);
       } catch (error) {
         this.error = "Failed to submit final step.";

@@ -55,7 +55,7 @@
           </div>
         </button>
         <button
-          @click="bookingStore.nextStep"
+          @click="handleSubmit()"
           class="relative px-12 py-6 text-black border border-black text-2xl leading-[108%] group overflow-hidden"
         >
           <span
@@ -64,7 +64,8 @@
           <div
             class="flex items-center justify-center space-x-4 relative z-10 transition-colors duration-500 group-hover:text-white"
           >
-            <p>Next</p>
+            <p v-if="bookingStore.currentStep ==2">Next</p>
+            <p v-if="bookingStore.currentStep ==3">Confirm & Pay</p>
             <i class="bx bx-right-arrow-alt"></i>
           </div>
         </button>
@@ -90,11 +91,55 @@ const handleStep1Submit = async () => {
     await bookingStore.submitStep1();
     console.log("Step 1 submitted successfully");
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
     bookingStore.nextStep();
   } catch (error) {
     console.error("Error during Step 1 submission:", error);
+  } finally {
+    bookingStore.loading = false;
+  }
+};
+const handleSubmit = async () => {
+  if(bookingStore.currentStep === 2){
+    handleStep2Submit();
+  }
+  else{
+    handleStep3Submit();
+  }
+}
+const handleStep2Submit = async () => {
+  try {
+    const isValid = bookingStore.validateStep(2);
+    if (!isValid) {
+      console.error("Validation failed for Step 1:", bookingStore.errors);
+      return;
+    }
+
+    bookingStore.loading = true;
+    await bookingStore.submitStep2();
+    console.log("Step 2 submitted successfully");
+
+    bookingStore.nextStep();
+  } catch (error) {
+    console.error("Error during Step 2 submission:", error);
+  } finally {
+    bookingStore.loading = false;
+  }
+};
+const handleStep3Submit = async () => {
+  try {
+    const isValid = bookingStore.validateStep(2);
+    if (!isValid) {
+      console.error("Validation failed for Step 1:", bookingStore.errors);
+      return;
+    }
+
+    bookingStore.loading = true;
+    await bookingStore.submitFinalStep();
+    console.log("Step 3 submitted successfully");
+
+    bookingStore.nextStep();
+  } catch (error) {
+    console.error("Error during Step 3 submission:", error);
   } finally {
     bookingStore.loading = false;
   }
