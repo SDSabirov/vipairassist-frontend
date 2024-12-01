@@ -38,24 +38,57 @@
               {{ service.prices[0].per_unit_price }} USD
             </span>
             <div class="flex items-center space-x-4">
-              
+              <div
+                v-if="
+                  bookingStore.formData.step2.extras.some(
+                    (item) => item.id === service.id
+                  )
+                "
+                class="flex items-center space-x-3"
+              >
+                <button
+                  @click="updateQuantity(service.id, -1)"
+                  class="text-lg flex items-center justify-center bg-gray-500 text-white rounded-full w-6 h-6"
+                >
+                  -
+                </button>
+                <p>
+                  {{
+                    bookingStore.formData.step2.extras.find(
+                      (item) => item.id === service.id
+                    )?.number_of_units
+                  }}
+                </p>
+                <button
+                 @click="updateQuantity(service.id, +1)"
+                  class="text-lg flex items-center justify-center bg-gray-500 text-white rounded-full w-6 h-6"
+                >
+                  +
+                </button>
+              </div>
               <button
-              @click="addService(service)"
-              :disabled="selectedExtras.some((item) => item.id === service.id)"
-              class="px-4 py-2 bg-black text-white text-sm hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Add
-            </button>
-            <button
-              @click="removeService(service)"
-              :disabled="selectedExtras.length == 0"
-              class="px-4 py-2 bg-red-500 text-white text-sm hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-            <i class='bx bx-trash'></i> Remove
-            </button>
-            
+                @click="addService(service)"
+                :disabled="
+                  bookingStore.formData.step2.extras.some(
+                    (item) => item.id === service.id
+                  )
+                "
+                class="px-4 py-2 bg-black text-white text-sm hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Add
+              </button>
+              <button
+                @click="removeService(service.id)"
+                :disabled="
+                  !bookingStore.formData.step2.extras.some(
+                    (item) => item.id === service.id
+                  )
+                "
+                class="px-4 py-2 bg-red-500 text-white text-sm hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <i class="bx bx-trash"></i> Remove
+              </button>
             </div>
-            
           </div>
         </div>
       </div>
@@ -69,7 +102,7 @@ import { useBookingStore } from "@/stores/booking";
 const bookingStore = useBookingStore();
 
 const isOpen = ref(false);
-let selectedExtras=ref([])
+let selectedExtras = ref([]);
 // Toggle the dropdown
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
@@ -84,27 +117,25 @@ defineProps({
 
 
 const addService = (service) => {
-  
-  selectedExtras.value.push({ ...service, quantity: 1 });
-  bookingStore.formData.step2.extras = selectedExtras.value
-  console.log(bookingStore.formData.step2)
-  
-}
-
-
-
-// const updateQuantity = (id, change) => {
-//   const service = selectedExtras.value.find((item) => item.id === id);
-//   if (service) {
-//     service.quantity = Math.max(1, service.quantity + change); // Ensure quantity never drops below 1
-//     emit("update:selectedExtras", [...selectedExtras.value]);
-//   }
-// };
-
-const removeService = (id) => {
-  selectedExtras.value.pop(id);
-  bookingStore.formData.step2.extras.pop(id)
-  console.log(selectedExtras)
-  console.log(bookingStore.formData.step2)
+  bookingStore.addExtraService(service);
+  console.log(bookingStore.formData.step2.extras);
 };
+
+// Remove service from store
+const removeService = (id) => {
+  bookingStore.removeExtraService(id);
+};
+
+// Update quantity in store
+const updateQuantity = (id, change) => {
+  const service = bookingStore.formData.step2.extras.find(
+    (item) => item.id === id
+  );
+  if (service) {
+    service.number_of_units = Math.max(1, service.number_of_units + change); // Ensure quantity never goes below 1
+  }
+};
+
+
+
 </script>

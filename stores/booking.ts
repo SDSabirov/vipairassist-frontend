@@ -138,7 +138,15 @@ export const useBookingStore = defineStore("booking", {
     ) {
       this.formData[section] = { ...this.formData[section], ...data };
     },
-
+    addExtraService(service){
+      this.formData.step2.extras.push({ ...service, quantity: 1 });
+      
+    },
+   
+    removeExtraService(id) {
+      this.formData.step2.extras = this.formData.step2.extras.filter(service => service.id !== id);
+    },
+    
     // Form Reset
     resetBooking() {
       this.currentStep = 1;
