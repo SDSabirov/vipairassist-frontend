@@ -8,7 +8,19 @@ type Airport = {
   city: string;
   country: string;
 };
-
+type ExtraService = {
+  name:string;
+  id:number;
+  description:string;
+  price:[];
+  main:number;
+}
+type Service = {
+  id:number;
+  name:string;
+  description:string;
+  prices:{};
+}
 type Passenger = { name: string; age: number };
 
 type Step1Data = {
@@ -33,7 +45,8 @@ type Step1Data = {
 };
 
 type Step2Data = {
-  services: string[];
+  services: Service[];
+  extras:ExtraService[];
 };
 
 type Step3Data = {
@@ -84,7 +97,7 @@ export const useBookingStore = defineStore("booking", {
     bookingReference:"",
     formData: {
       step1: { ...defaultStep1Data },
-      step2: { services: [] },
+      step2: { services: [],extras : [] },
       step3: { passengers: [] },
     },
     loading: false,

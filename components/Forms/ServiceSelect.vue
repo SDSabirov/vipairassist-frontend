@@ -11,8 +11,8 @@
             {{line}}
           </li>
         </ul>
-        <FormsExtraServicesSelect />
-        <FormsTermsConditions />
+        <FormsExtraServicesSelect v-model="service.extras"/>
+        <FormsTermsConditions v-model="terms_and_conditions"/>
       </div>
 
       <!--Right Side-->
@@ -71,18 +71,16 @@
           </div>
         </div>
         <!--Extras-->
-        <div class="flex flex-col">
+        <div v-if="bookingStore.formData.step2.extras" class="flex flex-col">
           <h3 class="mt-5 text-md leading-[157%] text-gray-500">
-            Extra Services added
+            Selected Extras
           </h3>
 
-          <div class="grid grid-cols-3 gap-2 mt-2">
-            <p class="text-md leading-6 text-gray-700">Chauffer</p>
-            <p>1</p>
-            <p>20 USD</p>
-            <p class="text-md leading-6 text-gray-700">Porter</p>
-            <p>1</p>
-            <p>20 USD</p>
+          <div v-for="extra in bookingStore.formData.step2.extras" class="grid grid-cols-4 gap-2 mt-2 items-center border-b border-b-black">
+            <p class="text-md leading-6 text-gray-700 col-span-2">{{ extra.name }}</p>
+            <p>{{ extra.quantity }}</p>
+            <p>{{ extra.prices[0].per_unit_price*extra.quantity }}  <span class="ml-2">USD</span></p>
+          
           </div>
         </div>
         <!--Select Button-->
@@ -111,8 +109,9 @@ import { useBookingStore } from "@/stores/booking";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
+
 const bookingStore = useBookingStore();
-let services = ref([]);
+
 let terms_and_conditions = ref(null);
 async function getServices(airport, type, bookingReference) {
   try {
@@ -134,6 +133,7 @@ async function getServices(airport, type, bookingReference) {
     console.log(error);
   }
 }
+let services = ref([]);
 onMounted(() => {
   console.log(services);
   getServices(
