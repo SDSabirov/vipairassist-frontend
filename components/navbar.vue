@@ -1,6 +1,8 @@
 <template>
+   <div>
+    <MobileNav/>
     <nav
-      class="fixed top-0 left-0 w-full z-50 transition-all duration-500"
+      class="fixed top-0 left-0 w-full z-50 transition-all duration-500 invisible lg:visible "
       :class="{ 'bg-black shadow-lg': isScrolled, 'bg-transparent': !isScrolled }"
     >
       <div
@@ -48,9 +50,9 @@
             </div>
           </div>
   
-          <a href="" class="hover:text-gray-400">About Us</a>
-          <a href="" class="hover:text-gray-400">Blogs</a>
-          <a href="" class="hover:text-gray-400">Contact Us</a>
+          <a href="/about" class="hover:text-gray-400">About Us</a>
+          <a href="/blogs" class="hover:text-gray-400">Blogs</a>
+          <a href="/contact" class="hover:text-gray-400">Contact Us</a>
         </div>
   
         <!-- Right Section: Login & Membership -->
@@ -60,6 +62,8 @@
         </div>
       </div>
     </nav>
+   </div>
+    
   </template>
   
   <script setup>
