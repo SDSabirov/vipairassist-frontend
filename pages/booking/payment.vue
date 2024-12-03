@@ -13,26 +13,19 @@
         
         <div class="w-full h-[400px]">
           <h1 class="text-3xl mb-6">Order Summary</h1>
-          <div class="grid grid-cols-2 w-full mb-4 border-b border-b-black/10">
-            <h3 class="text-xl">Meet & Greet</h3>
-            <p class="text-xl font-heading">400.00 USD</p>
+          <div class="grid grid-cols-2 w-full mb-4 border-b border-b-black/10" v-for="service,index in bookingStore.formData.step2.services" :key="index">
+            <h3 class="text-xl">{{service.name}}</h3>
+            <p class="text-xl font-heading">{{service.total_price}} USD</p>
           </div>
-          <div class="grid grid-cols-2 w-full mb-4 border-b border-b-black/10">
-            <h3 class="text-xl">Meet & Greet</h3>
-            <p class="text-xl font-heading">400.00 USD</p>
+          <div class="grid grid-cols-2 w-full mb-4 border-b border-b-black/10" v-for="service,index in bookingStore.formData.step2.extras" :key="index">
+            <h3 class="text-xl">{{service.name}}</h3>
+            <p class="text-xl font-heading">{{(service.number_of_units*service.prices[0].per_unit_price).toFixed(2)}} USD</p>
           </div>
-          <div class="grid grid-cols-2 w-full mb-4 border-b border-b-black/10">
-            <h3 class="text-xl">Meet & Greet</h3>
-            <p class="text-xl font-heading">400.00 USD</p>
-          </div>
+         
           <div class="flex flex-col items-center justify-start w-full">
-            <div class="grid grid-cols-2 items-center">
-              <p class="text-lg font-semibold">Tax</p>
-              <p class="text-lg font-heading">20 USD</p>
-              <p class="text-lg font-semibold">Fee</p>
-              <p class="text-lg font-heading">80 USD</p>
+            <div class="grid grid-cols-2 items-center gap-6" >
               <p class="text-xl font-semibold">Total</p>
-              <p class="text-xl font-heading font-semibold">1200 USD</p>
+              <p class="text-xl font-heading font-semibold">{{bookingStore.bookingConfirmed.totalPrice.toFixed(2)}} USD</p>
             </div>
           </div>
         </div>
@@ -46,7 +39,12 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useBookingStore } from "@/stores/booking";
+
+const bookingStore = useBookingStore();
+const totalPrice = bookingStore.bookingConfirmed.totalPrice
+</script>
 <style scoped>
 nav {
   background: black !important;

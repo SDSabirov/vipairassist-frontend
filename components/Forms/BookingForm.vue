@@ -76,7 +76,9 @@
 
 <script setup>
 import { useBookingStore } from '@/stores/booking';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const bookingStore = useBookingStore();
 
 const handleStep1Submit = async () => {
@@ -142,6 +144,13 @@ const handleStep3Submit = async () => {
     console.error("Error during Step 3 submission:", error);
   } finally {
     bookingStore.loading = false;
+    if(bookingStore.bookingConfirmed.bookingStatus==='Confirmed'){
+      router.push('/booking/payment')
+
+    }
+    else if(bookingStore.bookingConfirmed.bookingStatus==='Pending'){
+      router.push('/')
+    }
   }
 };
 </script>

@@ -8,7 +8,11 @@ export default defineNuxtConfig({
     "~": resolve(__dirname),
   },
   modules: ['@nuxtjs/seo', 'nuxt-gtag','@pinia/nuxt','@nuxtjs/google-fonts',],
-
+  runtimeConfig: {
+    public: {
+      paypalClientId: process.env.PAYPAL_CLIENT_ID, // Exposed to the client
+    },
+  },
   googleFonts: {
     families: {
       'Playfair+Display': [400, 500, 700],

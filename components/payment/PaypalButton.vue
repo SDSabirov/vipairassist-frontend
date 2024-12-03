@@ -6,10 +6,17 @@
 import axios from "axios";
 import { onMounted } from "vue";
 
+import { useBookingStore } from "@/stores/booking";
+
+const bookingStore = useBookingStore();
+const totalPrice = bookingStore.bookingConfirmed.totalPrice
+
+
 const loadPaypalScript = () => {
   return new Promise((resolve) => {
+    const clientId = useRuntimeConfig().public.paypalClientId;
     const script = document.createElement("script");
-    script.src = "https://www.paypal.com/sdk/js?client-id=&currency=USD";
+    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`;
     script.onload = () => resolve();
     document.body.appendChild(script);
   });
@@ -22,7 +29,7 @@ const initializePaypalButton = async () => {
     createOrder: async function () {
       try {
         const response = await axios.post("http://127.0.0.1:8000/api/v1/payments/create-order/", {
-          total: "100.00", // Example total
+          total: totalPrice, 
           currency: "USD",
         });
         return response.data.id; // Return EC-XXX token
@@ -59,6 +66,7 @@ const initializePaypalButton = async () => {
 };
 
 onMounted(() => {
+  
   initializePaypalButton();
 });
 </script>

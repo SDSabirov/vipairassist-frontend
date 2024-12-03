@@ -61,6 +61,12 @@ type FormData = {
   step3: Step3Data;
 };
 
+type BookingConfirmed = {
+  bookingReference:string;
+  bookingStatus:string;
+  chosenServices:[];
+  totalPrice:number;
+}
 // Default Values
 const defaultAirport: Airport = {
   name: "",
@@ -98,11 +104,19 @@ export const useBookingStore = defineStore("booking", {
     bookingType: "Arrival",
     bookingReference:"",
     totalPrice:0, //value used in step 3 
-    extrasTotal:0, //value used in step 3
+    extrasTotal:0, //value used in step 
     formData: {
       step1: { ...defaultStep1Data },
       step2: { services: [],extras : [] },
       step3: { passengers: [] },
+    },
+
+    //used only at final step
+    bookingConfirmed:{
+      bookingReference:'',
+      bookingStatus:'',
+      chosenServices:[],
+      totalPrice:0,
     },
     loading: false,
     errors: {} as Record<string, string>,
@@ -258,7 +272,10 @@ export const useBookingStore = defineStore("booking", {
         this.formData.step3.bookingReference = this.bookingReference
         const response = await axios.post("http://127.0.0.1:8000/api/v1/create-booking-step3/", this.formData.step3,
         );
-        console.log("Booking completed successfully:", response.data);
+        this.bookingConfirmed.bookingReference=response.data.booking_reference
+        this.bookingConfirmed.bookingStatus=response.data.booking_status
+        this.bookingConfirmed.chosenServices=response.data.services
+        this.bookingConfirmed.totalPrice=response.data.total_price
       } catch (error) {
         this.error = "Failed to submit final step.";
         console.error(error);
