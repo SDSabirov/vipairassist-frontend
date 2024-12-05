@@ -3,7 +3,7 @@
     <!-- Arrival -->
     <div
       @click="changeType('Arrival')"
-      class="flex items-center justify-center py-4 cursor-pointer border border-black space-x-6"
+      class="flex items-center justify-center py-4 cursor-pointer border border-black space-x-6 w-full"
       :class="modelValue === 'Arrival' ? 'bg-black/80' : 'bg-white'"
     >
       <img
@@ -22,7 +22,7 @@
     <!-- Departure -->
     <div
       @click="changeType('Departure')"
-      class="flex items-center justify-center py-4 cursor-pointer border border-black space-x-6"
+      class="flex items-center justify-center py-4 cursor-pointer border border-black space-x-6 w-full"
       :class="modelValue === 'Departure' ? 'bg-black/80' : 'bg-white'"
     >
       <img
@@ -41,7 +41,7 @@
     <!-- Transit -->
     <div
       @click="changeType('Transit')"
-      class="flex items-center justify-center py-4 cursor-pointer border border-black space-x-6"
+      class="flex items-center justify-center py-4 cursor-pointer border border-black space-x-6 w-full"
       :class="modelValue === 'Transit' ? 'bg-black/80' : 'bg-white'"
     >
       <img

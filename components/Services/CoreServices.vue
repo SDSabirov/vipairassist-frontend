@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <section class="bg-white w-full justify-center items-center">
     <div class="flex flex-col max-w-screen-xl mx-auto py-10">
@@ -16,7 +18,11 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 py-4 px-2 md:px-0">
         <!--Meet and Greet-->
-        <div class="relative w-full h-[450px] group overflow-hidden">
+
+        <NuxtLink
+          to="/services/meet-and-greet"
+          class="relative w-full h-[450px] group overflow-hidden"
+        >
           <!-- Background Image -->
           <div
             class="absolute inset-0 bg-cover bg-center transition-transform duration-500 bg-[url('/assets/images/services/meetgreetCard.webp')] group-hover:scale-105"
@@ -30,9 +36,14 @@
           >
             <h3>Meet & Greet Fast track</h3>
           </div>
-        </div>
+        </NuxtLink>
+
         <!--Private Vip Terminals-->
-        <div class="relative w-full h-[450px] group overflow-hidden">
+
+        <NuxtLink
+          to="/services/private-vip-terminal"
+          class="relative w-full h-[450px] group overflow-hidden"
+        >
           <!-- Background Image -->
           <div
             class="absolute inset-0 bg-cover bg-center transition-transform duration-500 bg-[url('/assets/images/services/vipterminal.webp')] group-hover:scale-105"
@@ -46,10 +57,12 @@
           >
             <h3>Private Vip Terminals</h3>
           </div>
-        </div>
+        </NuxtLink>
 
         <!--Chauffer-->
-        <div
+
+        <NuxtLink
+          to="/services/chauffer"
           class="relative w-full h-[450px] group overflow-hidden md:col-span-2"
         >
           <!-- Background Image -->
@@ -65,7 +78,7 @@
           >
             <h3>Chauffer Services</h3>
           </div>
-        </div>
+        </NuxtLink>
       </div>
     </div>
   </section>
