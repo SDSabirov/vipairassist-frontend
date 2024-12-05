@@ -1,7 +1,7 @@
 <template>
   <div class="relative top-0 w-screen h-screen">
     <img
-      src="/assets/images/backgrounds/bookingPage.webp"
+      :src="src"
       alt="hero image"
       class="object-cover h-full w-full"
     />
@@ -12,12 +12,26 @@
         class="flex flex-col max-w-screen-xl h-full items-center justify-center space-y-4"
       >
         <h1
-          class="text-white text-4xl md:text-6xl lg:text-8xl text-center mb-6 p-2 text-base leading-loose"
+          class="text-white text-4xl md:text-6xl lg:text-7xl text-center mb-6 p-2 text-base leading-loose"
         >
-          Geneva International Airport Airport Geneva Switzerland
+          {{name }}
         </h1>
 
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+defineProps({
+  src: {
+    type: String,
+    required: true,
+  },
+  name:{
+    type: String,
+    required: true,
+  },
+});
+</script>
+
