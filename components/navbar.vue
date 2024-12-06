@@ -52,6 +52,7 @@
   
           <a href="/about" class="hover:text-gray-400">About Us</a>
           <a href="/blogs" class="hover:text-gray-400">Blogs</a>
+          <a href="/airports" class="hover:text-gray-400">Airports</a>
           <a href="/contact" class="hover:text-gray-400">Contact Us</a>
         </div>
   

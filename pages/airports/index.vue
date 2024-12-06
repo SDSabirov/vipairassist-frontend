@@ -1,8 +1,9 @@
 <template>
   <div>
     <navbar />
-    <AirportsHero />
-    
+    <AirportsListHero />
+    <AirportsAllAirports />
+    <AirportsTopAirports />
     <Footer />
   </div>
 </template>

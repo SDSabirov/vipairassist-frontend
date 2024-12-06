@@ -1,7 +1,6 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="w-full h-full mx-auto">
+  <div class="w-full h-full ">
+    <LoadingAnimationBlack v-if="loading" />
     <div
       v-for="(service, index) in services"
       :key="index"
@@ -172,7 +171,7 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 
 const bookingStore = useBookingStore();
-
+const loading = ref(true);
 let terms_and_conditions = ref(null);
 async function getServices(airport, type, bookingReference) {
   try {
@@ -192,6 +191,9 @@ async function getServices(airport, type, bookingReference) {
     terms_and_conditions = response.data.terms_and_conditions;
   } catch (error) {
     console.log(error);
+  }
+  finally{
+    loading.value=false
   }
 }
 let services = ref([]);

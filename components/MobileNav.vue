@@ -73,6 +73,9 @@
             <a href="/blogs" class="block hover:text-gray-400">Blogs</a>
           </li>
           <li class="p-4 border-b-white border-b py-6">
+            <a href="/airports" class="hover:text-gray-400">Airports</a>
+          </li>
+          <li class="p-4 border-b-white border-b py-6">
             <a href="/contact" class="block hover:text-gray-400">Contact Us</a>
           </li>
           <li>

@@ -159,6 +159,7 @@ const stopAutoplay = () => {
 onMounted(() => {
   startAutoplay();
   window.addEventListener("resize", updateMaxIndex);
+  
 });
 
 onUnmounted(() => {
