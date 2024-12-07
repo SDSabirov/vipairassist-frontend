@@ -18,10 +18,10 @@
         <div>
           <h3 class="text-2xl font-bold mb-4 leading-[182%]">LEARN MORE</h3>
           <ul class="space-y-2 text-xl">
-            <li><a href="#why-us" class="hover:text-gray-300 ">Why Us?</a></li>
-            <li><a href="#how-it-works" class="hover:text-gray-300">How it works</a></li>
-            <li><a href="#terms" class="hover:text-gray-300">Terms and Conditions</a></li>
-            <li><a href="#faqs" class="hover:text-gray-300">FAQs</a></li>
+            <!-- <li><a href="/about" class="hover:text-gray-300 ">Why Us?</a></li> -->
+            <li><a href="/how-it-works" class="hover:text-gray-300">How it works</a></li>
+            <li><a href="/terms" class="hover:text-gray-300">Terms and Conditions</a></li>
+            <li><a href="/faqs" class="hover:text-gray-300">FAQs</a></li>
           </ul>
         </div>
   
@@ -29,10 +29,10 @@
         <div>
           <h3 class="text-2xl font-bold mb-4 leading-[182%]">RESOURCES</h3>
           <ul class="space-y-2 text-xl">
-            <li><a href="#help-center" class="hover:text-gray-300">Help center</a></li>
-            <li><a href="#blog" class="hover:text-gray-300">Our Blog</a></li>
-            <li><a href="#about-us" class="hover:text-gray-300">About Us</a></li>
-            <li><a href="#privacy-policy" class="hover:text-gray-300">Privacy policy</a></li>
+            <!-- <li><a href="#help-center" class="hover:text-gray-300">Help center</a></li> -->
+            <li><a href="/blogs" class="hover:text-gray-300">Our Blog</a></li>
+            <li><a href="/about" class="hover:text-gray-300">About Us</a></li>
+            <li><a href="/privacy-policy" class="hover:text-gray-300">Privacy policy</a></li>
           </ul>
         </div>
       </div>

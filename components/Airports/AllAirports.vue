@@ -45,28 +45,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import axios from "axios";
-const airports = ref([
-  { name: "Heathrow Airport", location: "London, UK" },
-  { name: "JFK Airport", location: "New York, USA" },
-  { name: "Changi Airport", location: "Singapore" },
-  { name: "Dubai Airport", location: "Dubai, UAE" },
-  { name: "Tokyo Haneda Airport", location: "Tokyo, Japan" },
-  { name: "Charles de Gaulle Airport", location: "Paris, France" },
-  { name: "Munich Airport", location: "Munich, Germany" },
-  { name: "Incheon Airport", location: "Seoul, South Korea" },
-  { name: "Sydney Airport", location: "Sydney, Australia" },
-  { name: "Toronto Pearson Airport", location: "Toronto, Canada" },
-  { name: "Heathrow Airport", location: "London, UK" },
-  { name: "JFK Airport", location: "New York, USA" },
-  { name: "Changi Airport", location: "Singapore" },
-  { name: "Dubai Airport", location: "Dubai, UAE" },
-  { name: "Tokyo Haneda Airport", location: "Tokyo, Japan" },
-  { name: "Charles de Gaulle Airport", location: "Paris, France" },
-  { name: "Munich Airport", location: "Munich, Germany" },
-  { name: "Incheon Airport", location: "Seoul, South Korea" },
-  { name: "Sydney Airport", location: "Sydney, Australia" },
-  { name: "Toronto Pearson Airport", location: "Toronto, Canada" },
-]);
+const airports = ref([]);
 
 const isExpanded = ref(false);
 

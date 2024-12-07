@@ -119,6 +119,7 @@ export const useBookingStore = defineStore("booking", {
       totalPrice:0,
     },
     loading: false,
+    bookingCompleted: false,
     errors: {} as Record<string, string>,
   }),
 
@@ -222,18 +223,7 @@ export const useBookingStore = defineStore("booking", {
     async submitStep1() {
       this.loading = true;
       this.formData.step1.bookingType=this.bookingType
-      let date= this.formData.step1.date
-      const d = typeof date === "string" ? new Date(date) : date;
-
-      if (isNaN(d.getTime())) {
-        console.error("Invalid date provided to formatDate");
-        return "";
-      }
-    
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, "0");
-      const day = String(d.getDate()).padStart(2, "0");
-      this.formData.step1.date = `${year}-${month}-${day}`
+      
       axios.defaults.xsrfCookieName = "csrftoken";
       axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
       try {
@@ -269,13 +259,17 @@ export const useBookingStore = defineStore("booking", {
     async submitFinalStep() {
       this.loading = true;
       try {
-        this.formData.step3.bookingReference = this.bookingReference
+        this.formData.step3.bookingReference = this.bookingReference;
         const response = await axios.post("http://127.0.0.1:8000/api/v1/create-booking-step3/", this.formData.step3,
         );
-        this.bookingConfirmed.bookingReference=response.data.booking_reference
-        this.bookingConfirmed.bookingStatus=response.data.booking_status
-        this.bookingConfirmed.chosenServices=response.data.services
-        this.bookingConfirmed.totalPrice=response.data.total_price
+        this.bookingConfirmed.bookingReference=response.data.booking_reference;
+        this.bookingConfirmed.bookingStatus=response.data.booking_status;
+        this.bookingConfirmed.chosenServices=response.data.services;
+        this.bookingConfirmed.totalPrice=response.data.total_price;
+        if(response.data.booking_status === 'Confirmed')
+        {
+          this.bookingCompleted =true;
+        }
       } catch (error) {
         this.error = "Failed to submit final step.";
         console.error(error);

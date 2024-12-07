@@ -88,7 +88,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 
-// Example testimonials
+
 const testimonials = ref([
   {
     name: "John Doe",
@@ -121,15 +121,19 @@ const testimonials = ref([
     image: "/path-to-avatar5.jpg",
   },
 ]);
-
+const visibleCards = ref(1);
 const currentIndex = ref(0);
+const maxIndex = computed(() => testimonials.value.length - visibleCards.value);
+const updateVisibleCards = () => {
+  if (window.innerWidth >= 1024) {
+    visibleCards.value = 3;
+  } else if (window.innerWidth >= 768) {
+    visibleCards.value = 2;
+  } else {
+    visibleCards.value = 1;
+  }
+};
 
-// Calculate the maximum index based on the number of cards visible
-const maxIndex = computed(() => {
-  const visibleCards =
-    window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
-  return testimonials.value.length - visibleCards;
-});
 
 // Handle navigation
 const prevSlide = () => {
@@ -149,7 +153,7 @@ const startAutoplay = () => {
     } else {
       currentIndex.value = 0;
     }
-  }, 5000); // Adjust interval (5 seconds here)
+  }, 5000); 
 };
 
 const stopAutoplay = () => {
@@ -157,13 +161,12 @@ const stopAutoplay = () => {
 };
 
 onMounted(() => {
-  startAutoplay();
+  updateMaxIndex()
   window.addEventListener("resize", updateMaxIndex);
   
 });
 
 onUnmounted(() => {
-  stopAutoplay();
   window.removeEventListener("resize", updateMaxIndex);
 });
 

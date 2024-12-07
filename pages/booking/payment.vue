@@ -44,6 +44,9 @@ import { useBookingStore } from "@/stores/booking";
 
 const bookingStore = useBookingStore();
 const totalPrice = bookingStore.bookingConfirmed.totalPrice
+definePageMeta({
+  middleware: "auth-booking",
+});
 </script>
 <style scoped>
 nav {

@@ -196,6 +196,7 @@ async function getServices(airport, type, bookingReference) {
     loading.value=false
   }
 }
+
 let services = ref([]);
 
 const calculateExtrasTotal = (mainServiceId) => {

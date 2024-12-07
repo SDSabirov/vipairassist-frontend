@@ -43,6 +43,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import axios from "axios";
+import { useBookingStore } from '@/stores/booking';
 
 type Airport = {
   name: string;
@@ -51,10 +52,10 @@ type Airport = {
   country: string;
 };
 
-import { useBookingStore } from '@/stores/booking';
-
-// Use the store in this component
 const bookingStore = useBookingStore();
+
+defineProps(["modelValue"]);
+const emit = defineEmits(["update:modelValue"]);
 
 const query = ref("");
 const airports = ref<Airport[]>([]);
@@ -98,6 +99,8 @@ const selectAirport = (airport: Airport) => {
   airports.value = []; // Clear suggestions
   query.value = airport.name; // Populate input with the selected airport
   bookingStore.formData.step1.airport = airport
+  emit("update:modelValue", airport);
 };
+
 
 </script>
