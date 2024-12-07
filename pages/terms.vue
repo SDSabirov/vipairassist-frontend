@@ -4,7 +4,7 @@
       <section class="w-full flex items-center justify-center py-20">
         <div class="max-w-screen-xl px-2 md:px-0">
           <div class="bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
+            
             <div
               class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
             >
@@ -13,7 +13,7 @@
               </h3>
             </div>
          
-            <div class="p-4 md:p-5 space-y-4 overflow-y-auto max-h-[300px]">
+            <div class="p-4 md:p-5 space-y-4 overflow-y-auto">
             <p
             class="text-base leading-relaxed text-gray-500 dark:text-gray-400 font-bold"
           >

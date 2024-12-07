@@ -26,6 +26,9 @@
       >
         <ul class="space-y-4 px-8">
           <li class="p-4 border-b-white border-b py-6">
+            <a href="/" class="block hover:text-gray-400">Home</a>
+          </li>
+          <li class="p-4 border-b-white border-b py-6">
             <div @click="toggleDropdown('services')" class="flex justify-between items-center ">
               <a href="/services" class="hover:text-gray-400">
                 Our Services
