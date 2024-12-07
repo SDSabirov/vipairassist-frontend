@@ -8,7 +8,7 @@
     <div
       class="absolute top-0 bg-black/50 w-full h-full flex flex-col items-center justify-center"
     >
-      <div
+      <header
         class="flex flex-col max-w-screen-xl h-full items-center justify-center space-y-4"
       >
         <h1
@@ -17,7 +17,7 @@
           {{name }}
         </h1>
 
-      </div>
+      </header>
     </div>
   </div>
 </template>

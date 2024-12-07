@@ -6,14 +6,14 @@
       alt="Service Image"
       class="h-full w-full object-cover object-top"
     />
-    <div class="absolute top-0 flex flex-col w-full h-full items-center justify-center">
+    <header class="absolute top-0 flex flex-col w-full h-full items-center justify-center">
         <h2 class="text-4xl md:text-6xl text-white">
             {{ page }}
         </h2>
         <div class="mt-10">
             <ButtonsBookNow />
         </div>
-    </div>
+    </header>
     <div
         class="absolute bottom-0 px-5 md:px-[50px] pb-10 pt-5 md:mt-[55px] translate-y-6 mx-auto bg-[#fbfcf8] rounded-t-[40px]"
       >

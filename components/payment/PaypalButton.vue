@@ -5,7 +5,9 @@
 <script setup>
 import axios from "axios";
 import { onMounted } from "vue";
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 import { useBookingStore } from "@/stores/booking";
 
 const bookingStore = useBookingStore();
@@ -45,7 +47,7 @@ const initializePaypalButton = async () => {
           orderID: data.orderID, // Pass EC-XXX to backend
         });
         if (response.status === 201) {
-          alert("Payment captured successfully!");
+          router.push("/booking/success");
         } else {
           alert("Payment capture failed!");
         }
