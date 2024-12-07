@@ -7,7 +7,7 @@
       <!--step 1-->
       <div v-if="bookingStore.currentStep===1" class="w-full" >
         <p class="text-lg text-gray-400 mb-4">I am booking a service for</p>
-        <form @submit.prevent="handleStep1Submit">
+        <form @submit.prevent="handleStep1Submit" class="w-full">
           <ButtonsBookingType v-model="bookingStore.bookingType" class="mb-6"/>
         <FormsTransitForm v-if="bookingStore.bookingType === 'Transit'" v-model="bookingStore.data"/>
         <FormsArrivalDepartureForm v-else v-model="bookingStore.data"/>

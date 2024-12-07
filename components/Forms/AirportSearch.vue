@@ -7,7 +7,7 @@
         type="text"
         placeholder="Enter airport name..."
         class="w-full h-full p-3 bg-gray-200 text-gray-600 text-sm focus:outline-none focus:ring focus:ring-black"
-        :class="bookingStore.errors.airport ? 'border-red-500 ring-red-500' : ''"
+        :class="bookingStore.errors.airport || bookingStore.errors.airportSecondary ? 'border-red-500 ring-red-500' : ''"
         @input="fetchAirports"
       />
 
@@ -101,6 +101,5 @@ const selectAirport = (airport: Airport) => {
   bookingStore.formData.step1.airport = airport
   emit("update:modelValue", airport);
 };
-
 
 </script>

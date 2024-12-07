@@ -3,20 +3,20 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
         <!-- Full Name -->
-        <div class="relative h-[62px]">
+        <div class="relative h-[62px] w-full">
           <label for="name" class="absolute -top-2 bg-white px-2 text-sm" 
           :class="bookingStore.errors.name ? 'text-red-500' : ''">Full Name </label>
           <input
             v-model="bookingStore.formData.step1.name"
             type="text"
             placeholder="Full Name"
-            class="w-full h-full p-3 bg-gray-200 text-gray-600 text-sm focus:outline-none focus:ring focus:ring-black"
+            class="w-full h-full p-3 bg-gray-200 text-gray-600 text-sm focus:outline-none focus:ring focus:ring-black "
             :class="bookingStore.errors.name ? 'border-red-500 ring-red-500' : ''"
           />
         </div>
 
         <!-- Email -->
-        <div class="relative h-[62px]">
+        <div class="relative h-[62px] w-full">
           <label for="email" class="absolute -top-2 bg-white px-2 text-sm"
           :class="bookingStore.errors.email ? 'text-red-500' : ''">Email</label>
           <input
@@ -29,7 +29,7 @@
         </div>
 
         <!-- Phone -->
-        <div class="relative h-[62px]">
+        <div class="relative h-[62px] w-full">
           <label for="phone" class="absolute -top-2 bg-white px-2 text-sm"
           :class="bookingStore.errors.phone ? 'text-red-500' : ''">Phone</label>
           <input
@@ -42,14 +42,14 @@
         </div>
 
         <!-- Airport -->
-        <div class="flex flex-col relative h-[62px]">
+        <div class="flex flex-col relative h-[62px] w-full">
           <label for="airport" class="absolute -top-2 bg-white px-2 text-sm z-10"
-          :class="bookingStore.errors.airport ? 'text-red-500' : ''">Airport</label>
+          :class="bookingStore.errors.airport || bookingStore.errors.airportSecondary ? 'border-red-500 ring-red-500' : ''">Airport</label>
           <FormsAirportSearch />
         </div>
 
         <!-- Flight Number -->
-        <div class="relative h-[62px]">
+        <div class="relative h-[62px] w-full">
           <label for="flightNumber" class="absolute -top-2 bg-white px-2 text-sm"
           :class="bookingStore.errors.flight ? 'text-red-500' : ''">Flight Number</label>
           <input
@@ -62,13 +62,13 @@
         </div>
 
         <!-- Number of Passengers -->
-        <div class="flex w-full h-[62px] relative">
+        <div class="flex w-full h-[62px] relative w-full">
           <label for="passengers" class="absolute -top-2 bg-white px-2 text-sm z-10">Number of Passengers</label>
           <FormsPassengerSelector />
         </div>
 
         <!-- Number of Bags -->
-        <div class="relative h-[62px]">
+        <div class="relative h-[62px] w-full">
           <label for="bags" class="absolute -top-2 bg-white px-2 text-sm"
           :class="bookingStore.errors.numberOfBags ? 'text-red-500' : ''">Number of Bags</label>
           <input
@@ -81,14 +81,15 @@
         </div>
 
         <!-- Date & Time -->
-        <div class="flex w-full h-[62px] bg-gray-200 p-3 space-x-6 relative">
-          <label for="dateTime" class="absolute -top-3 left-0 bg-white px-2 text-sm z-10">Date & Time</label>
+        <div class="flex w-full h-[62px] bg-gray-200 p-3 space-x-6 relative ">
+          <label for="dateTime" class="absolute -top-3 left-0 bg-white px-2 text-sm z-10"
+          :class="bookingStore.errors.date || bookingStore.errors.time ? 'border-red-500 ring-red-500' : ''">Date & Time</label>
           <FormsDatepicker v-model="bookingStore.formData.step1.date" />
           <FormsTimepicker v-model="bookingStore.formData.step1.time" />
         </div>
 
         <!-- Notes / Extra Requests -->
-        <div class="relative h-[124px] md:col-span-2">
+        <div class="relative h-[124px] md:col-span-2 w-full">
           <label for="extraRequest" class="absolute -top-2 bg-white px-2 text-sm">Any Extra Request?</label>
           <input
             v-model="bookingStore.formData.step1.extraRequest"

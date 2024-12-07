@@ -91,35 +91,37 @@ import { ref, computed, onMounted, onUnmounted } from "vue";
 
 const testimonials = ref([
   {
-    name: "John Doe",
-    date: "July 15, 2023",
-    message: "This service is fantastic! Highly recommended.",
+    name: "– John D",
+    date: "November 15, 2024",
+    message: "VIPAIRASSIST transformed my travel experience! From fast-tracking through security at Heathrow to the luxurious lounge access, everything was seamless and stress-free",
     image: "/path-to-avatar1.jpg",
   },
   {
-    name: "Jane Smith",
-    date: "August 8, 2023",
-    message: "Excellent support and great results!",
+    name: " – James R",
+    date: "November 2, 2024",
+    message: "The VIP service at LAX was incredible! No waiting in lines, and the personal concierge made sure I was comfortable throughout the process. Will definitely use VIPAIRASSIST again!",
+    image: "/path-to-avatar5.jpg",
+  },
+  {
+    name: "– Sarah T",
+    date: "October 8, 2024",
+    message: "Traveling with kids can be challenging, but VIPAIRASSIST made it a breeze. They handled all our luggage, got us through security in minutes, and even had a play area in the lounge!",
     image: "/path-to-avatar2.jpg",
   },
   {
-    name: "Sam Wilson",
-    date: "September 10, 2023",
-    message: "A truly wonderful experience from start to finish.",
-    image: "/path-to-avatar3.jpg",
-  },
-  {
-    name: "Alice Johnson",
-    date: "October 5, 2023",
-    message: "The best decision I've ever made.",
+    name: "– Catherine L",
+    date: "October 5, 2024",
+    message: "Arriving at Dubai International, I was greeted with first-class service. The VIPAIRASSIST team handled all the details so I could relax in their private suite before my connection.",
     image: "/path-to-avatar4.jpg",
   },
   {
-    name: "Michael Brown",
-    date: "November 2, 2023",
-    message: "Their professionalism and expertise stand out.",
-    image: "/path-to-avatar5.jpg",
+    name: " – Michael B",
+    date: "September 10, 2024",
+    message: "As a frequent business traveler, time is everything. VIPAIRASSIST helped me get through check-in and security at JFK in record time, leaving me plenty of time to relax before my flight",
+    image: "/path-to-avatar3.jpg",
   },
+  
+  
 ]);
 const visibleCards = ref(1);
 const currentIndex = ref(0);

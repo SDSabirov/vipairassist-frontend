@@ -2,7 +2,6 @@
   <div class="grid grid-cols-1 md:grid-cols-3 w-full">
     <!-- Step 1: Journey -->
     <div
-      @click="changeStep(1)"
       class="flex items-center justify-center py-4 cursor-pointer"
       :class="modelValue === 1 ? 'bg-white' : 'bg-gray-200'"
     >
@@ -16,7 +15,6 @@
 
     <!-- Step 2: Services -->
     <div
-      @click="changeStep(2)"
       class="flex items-center justify-center py-4 cursor-pointer"
       :class="modelValue === 2 ? 'bg-white' : 'bg-gray-200'"
     >
@@ -30,7 +28,6 @@
 
     <!-- Step 3: Summary -->
     <div
-      @click="changeStep(3)"
       class="flex items-center justify-center py-4 cursor-pointer"
       :class="modelValue === 3 ? 'bg-white' : 'bg-gray-200'"
     >

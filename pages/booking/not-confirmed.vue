@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-screen bg-yellow-50">
+  <div class="flex flex-col items-center justify-center h-screen ">
     <div
       class="flex items-center justify-center w-24 h-24 text-yellow-700 rounded-full mb-6"
     >
@@ -8,7 +8,7 @@
         width="88"
         height="88"
         viewBox="0 0 24 24"
-        style="fill: rgba(0, 0, 0, 1); transform: ; msfilter: "
+        style="fill: rgba(255, 219, 15, 1); "
       >
         <path
           d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"
@@ -18,7 +18,7 @@
     </div>
 
     <!-- Unconfirmed Message -->
-    <h1 class="text-2xl md:text-3xl font-semibold text-yellow-700">
+    <h1 class="text-2xl md:text-3xl font-semibold text-yellow-300">
       Booking Under Review
     </h1>
     <p class="text-gray-600 mt-2 text-center px-4">

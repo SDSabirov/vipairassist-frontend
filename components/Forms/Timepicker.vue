@@ -29,13 +29,17 @@
         type="time"
         id="time"
         class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm focus:ring-black block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        required
+        :class="bookingStore.errors.time ? 'border-red-500 ring-red-500' : ''"
       />
     </div>
   </div>
 </template>
 
 <script setup>
+import { useBookingStore } from '@/stores/booking';
+
+const bookingStore = useBookingStore();
+
 defineProps(["modelValue"]);
 const emit = defineEmits(["update:modelValue"]);
 

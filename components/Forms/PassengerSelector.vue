@@ -5,6 +5,7 @@
         @click="toggleDropdown"
         type="button"
         class="flex items-center border border-black justify-between bg-gray-200 px-4 py-2 w-full h-full"
+        :class="bookingStore.errors.adults > 0 ? 'border-red-500 ring-red-500' : ''"
     
       >
         <span>{{ selectionSummary }}</span>

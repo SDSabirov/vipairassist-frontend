@@ -85,7 +85,7 @@ const defaultStep1Data: Step1Data = {
   adults: 1,
   children: 0,
   infants: 0,
-  numberOfBags: 0,
+  numberOfBags: 1,
   date: "",
   time: "",
   extraRequest: "",
@@ -173,10 +173,17 @@ export const useBookingStore = defineStore("booking", {
       this.bookingReference = "";
       this.totalPrice = 0;
       this.extrasTotal = 0;
+      this.bookingCompleted = false,
       this.formData = {
         step1: { ...defaultStep1Data },
-        step2: { services: [] },
+        step2: { services: [], extras: [],},
         step3: { passengers: [] },
+      };
+      this.bookingConfirmed={
+        bookingReference:'',
+        bookingStatus:'',
+        chosenServices:[],
+        totalPrice:0,
       };
     },
 
@@ -201,13 +208,39 @@ export const useBookingStore = defineStore("booking", {
           this.errors.phone = "Phone number is required.";
           isValid = false;
         }
-        if (!this.formData.step1.airport) {
+        if (!this.formData.step1.airport.name) {
           this.errors.airport = "Airport is required.";
           isValid = false;
         }
         if (!this.formData.step1.flight) {
           this.errors.flight = "Flight number is required.";
           isValid = false;
+        }
+        if (!this.formData.step1.date) {
+          this.errors.date = "Date is required.";
+          isValid = false;
+        }
+        if (!this.formData.step1.time ) {
+          this.errors.time = "Time is required.";
+          isValid = false;
+        }
+        if (this.bookingType == 'Transit') {
+          if (!this.formData.step1.airport) {
+            this.errors.airportSecondary = "Airport is required.";
+            isValid = false;
+          }
+          if (!this.formData.step1.flightSecondary) {
+            this.errors.flightSecondary = "Flight number is required.";
+            isValid = false;
+          }
+          if (!this.formData.step1.dateSecondary) {
+            this.errors.dateSecondary = "Date is required.";
+            isValid = false;
+          }
+          if (!this.formData.step1.timeSecondary) {
+            this.errors.timeSecondary = "Time is required.";
+            isValid = false;
+          }
         }
       }
 

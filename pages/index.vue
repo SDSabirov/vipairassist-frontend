@@ -8,7 +8,7 @@
       <LandingAbout/>
       <testimonials/>
       <Footer />
-      <Whatsapp/>
+      
     </div>
 </template>
 

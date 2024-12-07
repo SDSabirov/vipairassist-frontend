@@ -1,6 +1,9 @@
 <template>
   <div class="w-full h-full ">
-    <LoadingAnimationBlack v-if="loading" />
+    <div class="w-full h-full" v-if="loading" >
+      <LoadingAnimationBlack />
+    </div>
+    
     <div
       v-for="(service, index) in services"
       :key="index"

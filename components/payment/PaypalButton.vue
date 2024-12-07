@@ -1,5 +1,9 @@
 <template>
-  <div id="paypal-button-container" class="paypal-button w-full"></div>
+  <div>
+    <LoadingAnimationBlack v-if ="loading"/>
+    <div id="paypal-button-container" class="paypal-button w-full"></div>
+  </div>
+  
 </template>
 
 <script setup>
@@ -12,7 +16,7 @@ import { useBookingStore } from "@/stores/booking";
 
 const bookingStore = useBookingStore();
 const totalPrice = bookingStore.bookingConfirmed.totalPrice
-
+const loading = ref(true)
 
 const loadPaypalScript = () => {
   return new Promise((resolve) => {
@@ -26,7 +30,7 @@ const loadPaypalScript = () => {
 
 const initializePaypalButton = async () => {
   await loadPaypalScript();
-
+  loading.value=false
   paypal.Buttons({
     createOrder: async function () {
       try {

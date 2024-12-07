@@ -23,6 +23,7 @@
       type="text"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-black block w-full ps-10 p-2.5"
       placeholder="Select date"
+      :class="bookingStore.errors.date ? 'border-red-500 ring-red-500' : ''"
     />
   </div>
 </template>
@@ -30,7 +31,9 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useFlowbite } from "~/composables/useFlowbite";
+import { useBookingStore } from '@/stores/booking';
 
+const bookingStore = useBookingStore();
 // Props and Emit
 defineProps(["modelValue"]);
 const emit = defineEmits(["update:modelValue"]);
