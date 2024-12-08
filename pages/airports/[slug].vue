@@ -78,7 +78,9 @@
                   class="flex flex-col list-image-[url(/assets/images/icons/check.png)] px-6 space-y-4"
                 >
                   <li
-                    v-for="(line, index) in selectedService.description.split('\n')"
+                    v-for="(line, index) in selectedService.description.split(
+                      '\n'
+                    )"
                     :key="index"
                     class="text-xl leading-10"
                   >
@@ -148,45 +150,45 @@
 import { useBookingStore } from "@/stores/booking";
 import { useRoute } from "vue-router";
 import axios from "axios";
-import { watch } from "vue";
+import { watch, ref, onMounted, computed } from "vue";
+
 
 const bookingStore = useBookingStore();
+const route = useRoute();
+const slug = ref(route.params.slug);
 
-let description = ``;
-let name = "";
-let background = "";
-
-let selectedService = ref(null);
-let selectedServices = ref([]);
-// State to toggle between full and truncated content
+let airportData = ref(null);
+const loading = ref(true);
+const selectedService = ref(null);
+const selectedServices = ref([]);
 const showFullContent = ref(false);
 
-// Truncated version of the description
+const description = computed(() => airportData.value?.about_field || "");
+const name = computed(() => airportData.value?.name || "");
+const background = computed(() => airportData.value?.cover_image_url || "");
 const truncatedDescription = computed(() =>
-  description.length > 160 ? description.slice(0, 160) : description
+  description.value.length > 160 ? description.value.slice(0, 160) : description.value
 );
 
-// Toggle the content view
+// Toggle between full and truncated description
 const toggleContent = () => {
   showFullContent.value = !showFullContent.value;
 };
-const route = useRoute(); // Access the dynamic route params
-const slug = ref(route.params.slug); // Get the slug from the route
-let airportData = ref(null);
-const loading = ref(true);
 
-// Fetch airport data based on the slug
+// Fetch airport data
 const fetchAirportData = async () => {
   try {
     const response = await axios.get(
       `http://127.0.0.1:8000/api/v1/top-airports/${slug.value}/`
     );
-    airportData.value = response.data[0];
-    name = airportData.value.name;
-    background = airportData.value.cover_image_url;
-    description = airportData.value.about_field;
-    selectedServices = airportData.value.arrival_services;
-    selectedService.value = selectedServices[0];
+    if (response.data && response.data[0]) {
+      airportData.value = response.data[0];
+      selectedServices.value = airportData.value.arrival_services || [];
+      selectedService.value = selectedServices.value[0] || null;
+
+      // Set initial meta tags
+      updateMetaTags();
+    }
   } catch (error) {
     console.error("Error fetching airport data:", error);
   } finally {
@@ -194,10 +196,22 @@ const fetchAirportData = async () => {
   }
 };
 
+// Update meta tags dynamically
+const updateMetaTags = () => {
+  useHead({
+    title: name.value,
+    meta: [
+      {
+        name: "description",
+        content: description.value.slice(0, 170),
+      },
+    ],
+  });
+};
+
+// Update services based on booking type
 const changeServices = () => {
   if (!airportData.value) return;
-
-  console.log("Booking Type:", bookingStore.bookingType);
 
   if (bookingStore.bookingType === "Arrival") {
     selectedServices.value = airportData.value.arrival_services || [];
@@ -207,27 +221,26 @@ const changeServices = () => {
     selectedServices.value = airportData.value.transit_services || [];
   }
 
-  console.log("Selected Services:", selectedServices.value);
-
   selectedService.value =
     selectedServices.value.length > 0 ? { ...selectedServices.value[0] } : null;
-
-  console.log("Selected Service:", selectedService.value);
 };
 
-// Watch for changes in `bookingType`
+// Watch booking type for changes
 watch(
   () => bookingStore.bookingType,
   () => {
     changeServices();
   }
 );
+
+// Handle selected service change
 const handleServiceChange = (service) => {
   selectedService.value = service;
 };
 
-// Fetch data on component mount
+// Fetch data and set meta tags on component mount
 onMounted(() => {
   fetchAirportData();
 });
 </script>
+

@@ -42,6 +42,14 @@
 </template>
 
 <script setup>
-
+useHead({
+    title: "About Us – Experts in Premium Airport Services Worldwide",
+    meta: [
+      {
+        name: "description",
+        content: `Discover our commitment to redefining luxury travel with seamless airport services. From Meet and Greet to VIP Terminal access, Chauffeur transfers, and Fast Track assistance, we cater to discerning travelers seeking comfort, efficiency, and personalized experiences. Learn more about our mission and dedication to excellence.`
+      },
+    ],
+  });
 </script>
 

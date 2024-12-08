@@ -134,6 +134,39 @@ const expanded = ref(null);
 const toggle = (index) => {
   expanded.value = expanded.value === index ? null : index;
 };
+
+const generateFAQSchema = () => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.value.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+};
+
+
+useHead({
+  title: "FAQ – Answers About Our VIP Airport Services",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Find answers to frequently asked questions about our Meet & Greet, Fast Track, Chauffeur, and VIP Terminal services. Learn how our services work and how they make your airport experience seamless.",
+    },
+  ],
+  script: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify(generateFAQSchema()),
+    },
+  ],
+});
 </script>
 
 <style scoped>

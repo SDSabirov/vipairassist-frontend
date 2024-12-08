@@ -62,6 +62,15 @@ import image from "~/assets/images/services/meetgreetdetail.jpg";
 import Navbar from "~/components/navbar.vue";
 
 const page = "Meet & Greet , Fast Track";
+useHead({
+    title: "Meet and Greet & Fast Track Airport Services – Skip the Lines and Travel in Comfort",
+    meta: [
+      {
+        name: "description",
+        content: `Enjoy a smooth and stress-free airport experience with our Meet and Greet and Fast Track services. Skip long lines, breeze through security, and receive personalized assistance from our expert concierges. Whether you're traveling for business or leisure, our premium service ensures that you start your journey with ease and comfort.`
+      },
+    ],
+  });
 </script>
 
 <style lang="scss" scoped></style>

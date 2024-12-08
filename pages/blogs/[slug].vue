@@ -129,7 +129,8 @@ const blog = ref(null);
 const route = useRoute();
 let image = ref(null);
 let page = ref(null);
-// Fetch blog data based on slug
+
+
 onMounted(() => {
   const slug = route.params.slug;
   blog.value = blogs.find((item) => item.slug === slug);
@@ -138,5 +139,14 @@ onMounted(() => {
   if (!blog.value) {
     console.error("Blog not found!");
   }
+  useHead({
+    title: blog.value.title,
+    meta: [
+      {
+        name: "description",
+        content: blog.value.content.slice(0, 160), // Limit description length
+      },
+    ],
+  });
 });
 </script>

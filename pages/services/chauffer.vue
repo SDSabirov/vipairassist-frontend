@@ -71,6 +71,15 @@ import image from "~/assets/images/services/chaufferdetail.webp";
 import Navbar from "~/components/navbar.vue";
 
 const page = " Chauffer Services";
+useHead({
+    title: "Chauffeur Airport Transfers – Luxury Travel with Personalized Comfort",
+    meta: [
+      {
+        name: "description",
+        content: `Arrive in style with our chauffeur services at airports worldwide. Our professional drivers provide luxury transfers, ensuring a seamless and comfortable experience from the airport to your destination. Relax in the back of a premium vehicle as we take care of your transportation needs, leaving you free to enjoy your travel.`
+      },
+    ],
+  });
 </script>
 
 <style lang="scss" scoped></style>

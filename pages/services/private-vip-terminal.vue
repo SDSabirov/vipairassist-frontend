@@ -62,6 +62,15 @@
   import Navbar from "~/components/navbar.vue";
   
   const page = "Private VIP Terminal Services";
+  useHead({
+    title: "VIP Terminal Access – Exclusive Airport Lounges and Personalized Service",
+    meta: [
+      {
+        name: "description",
+        content: `Indulge in the luxury of VIP Terminal access, offering exclusive lounges and expedited services at major airports worldwide. Skip the crowds, enjoy private check-in, and relax in a tranquil, upscale environment before your flight. Our VIP terminal services ensure a refined and hassle-free airport experience, tailored to your needs.`
+      },
+    ],
+  });
   </script>
   
   <style lang="scss" scoped></style>
