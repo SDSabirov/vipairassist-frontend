@@ -49,10 +49,9 @@
           >
             <!-- Card -->
             <NuxtLink :to="`/airports/${item.name.replace(/\s+/g, '-')}`">
-              <div 
-                class="h-[500px] flex flex-col bg-white rounded-xl overflow-hidden group "
+              <div
+                class="h-[500px] flex flex-col bg-white rounded-xl overflow-hidden group"
               >
-
                 <!-- Background Image with Loading State -->
                 <div class="relative h-[60%] bg-cover bg-center bg-black/60">
                   <div
@@ -65,7 +64,7 @@
                     v-if="item.cover_image_url"
                     :src="item.cover_image_url"
                     alt="Airport"
-                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-300 "
+                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-300"
                     @load="markImageLoaded(index)"
                     @error="markImageLoaded(index)"
                   />
@@ -74,18 +73,16 @@
                 <!-- Title and Description -->
                 <div class="h-[40%] p-4">
                   <h3
-                    class="text-xl  lg:text-2xl font-semibold text-gray-600 group-hover:text-gray-800 transition-all duration-300"
+                    class="text-xl lg:text-2xl font-semibold text-gray-600 group-hover:text-gray-800 transition-all duration-300"
                   >
                     {{ item.name }}, {{ item.city }}, {{ item.country }}
                   </h3>
-                  <p
-                    class="text-sm md:text-base lg:text-lg text-gray-600 mt-2"
-                  >
+                  <p class="text-sm md:text-base lg:text-lg text-gray-600 mt-2">
                     {{ item.description }}
                   </p>
                 </div>
               </div>
-             </NuxtLink>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -99,14 +96,14 @@
         <i class="bx bx-chevron-right text-2xl"></i>
       </button>
 
-      <!-- Dots -->
       <div class="flex justify-center mt-4 space-x-2">
         <span
-          v-for="(item, index) in items.length"
-          :key="index"
-          @click="currentIndex = index"
-          :class="[ 'w-3 h-3 rounded-full cursor-pointer',
-            index === currentIndex ? 'bg-gray-800' : 'bg-gray-300',
+          v-for="page in totalPages"
+          :key="page"
+          @click="currentIndex = page - 1"
+          :class="[
+            'w-3 h-3 rounded-full cursor-pointer',
+            page - 1 === currentIndex ? 'bg-gray-800' : 'bg-gray-300',
           ]"
         ></span>
       </div>
@@ -134,13 +131,35 @@ const loading = ref(true);
 const currentIndex = ref(0);
 const imageLoaded = ref([]); // Track loaded images
 
-// Calculate the max index based on visible cards
-const maxIndex = computed(() => items.value.length - 3);
+// Calculate the max index for navigation
+const maxIndex = computed(() => totalPages.value - 1);
 
+// Compute the number of visible cards based on screen size
+const visibleCards = computed(() => {
+  if (window.innerWidth >= 1024) return 3; // Large screens
+  if (window.innerWidth >= 768) return 2; // Medium screens
+  return 1; // Small screens
+});
+
+// Compute the total number of pages
+const totalPages = computed(() => {
+  return Math.ceil(items.value.length / visibleCards.value);
+});
+
+// Update carousel index
+const prevSlide = () => {
+  if (currentIndex.value > 0) currentIndex.value--;
+};
+
+const nextSlide = () => {
+  if (currentIndex.value < maxIndex.value) currentIndex.value++;
+};
 // Fetch data from API
 const fetchAirportData = async () => {
   try {
-    const response = await axios.get(`http://127.0.0.1:8000/api/v1/top-airports/`);
+    const response = await axios.get(
+      `http://127.0.0.1:8000/api/v1/top-airports/`
+    );
     items.value = response.data; // Replace with actual API response fields
     imageLoaded.value = Array(response.data.length).fill(false); // Initialize loading state
   } catch (error) {
@@ -149,14 +168,10 @@ const fetchAirportData = async () => {
     loading.value = false;
   }
 };
-
-// Navigation functions
-const prevSlide = () => {
-  if (currentIndex.value > 0) currentIndex.value--;
-};
-
-const nextSlide = () => {
-  if (currentIndex.value < maxIndex.value) currentIndex.value++;
+const updateVisibleCards = () => {
+  // Recompute `visibleCards` by triggering its dependency
+  visibleCards.value =
+    window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
 };
 
 // Mark image as loaded
@@ -184,11 +199,12 @@ const stopAutoplay = () => {
 // Lifecycle
 onMounted(() => {
   fetchAirportData();
+  window.addEventListener("resize", updateVisibleCards);
   startAutoplay();
 });
 
 onUnmounted(() => {
+  window.removeEventListener("resize", updateVisibleCards);
   stopAutoplay();
 });
 </script>
-
