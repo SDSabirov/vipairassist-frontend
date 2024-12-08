@@ -123,7 +123,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import axios from "axios";
+import axios from "~/api/drf";
 
 // Carousel state
 const items = ref([]);
@@ -158,7 +158,7 @@ const nextSlide = () => {
 const fetchAirportData = async () => {
   try {
     const response = await axios.get(
-      `http://127.0.0.1:8000/api/v1/top-airports/`
+      `top-airports/`
     );
     items.value = response.data; // Replace with actual API response fields
     imageLoaded.value = Array(response.data.length).fill(false); // Initialize loading state

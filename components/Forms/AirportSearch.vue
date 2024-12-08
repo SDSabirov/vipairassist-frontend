@@ -78,7 +78,7 @@ const fetchAirports = () => {
 
     loading.value = true;
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/v1/search-airport/", {
+      const response = await axios.get("https://api.vipairassist.com/api/v1/search-airport/", {
         params: { search_query: query.value },
         cancelToken: cancelToken.token,
       });
@@ -101,5 +101,6 @@ const selectAirport = (airport: Airport) => {
   bookingStore.formData.step1.airport = airport
   emit("update:modelValue", airport);
 };
+
 
 </script>

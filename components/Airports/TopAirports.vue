@@ -111,7 +111,7 @@
   
   <script setup>
   import { ref, computed, onMounted, onUnmounted } from "vue";
-  import axios from "axios";
+  import axios from "~/api/drf";
   
   // Carousel state
   const items = ref([]);
@@ -125,7 +125,7 @@
   // Fetch data from API
   const fetchAirportData = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/v1/top-airports/`);
+      const response = await axios.get(`top-airports/`);
       items.value = response.data; // Replace with actual API response fields
       imageLoaded.value = Array(response.data.length).fill(false); // Initialize loading state
     } catch (error) {

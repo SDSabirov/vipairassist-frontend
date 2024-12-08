@@ -10,7 +10,8 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/seo", "nuxt-gtag", "@pinia/nuxt", "@nuxtjs/google-fonts"],
   runtimeConfig: {
     public: {
-      paypalClientId: process.env.PAYPAL_CLIENT_ID, // Exposed to the client
+      paypalClientId: process.env.PAYPAL_CLIENT_ID, 
+      API_BASE_URL: process.env.API_BASE_URL
     },
   },
   googleFonts: {

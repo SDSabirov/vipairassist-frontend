@@ -170,16 +170,18 @@
 
 <script setup>
 import { useBookingStore } from "@/stores/booking";
-import axios from "axios";
+import axios from "~/api/drf";
 import { onMounted, ref } from "vue";
 
 const bookingStore = useBookingStore();
 const loading = ref(true);
 let terms_and_conditions = ref(null);
 async function getServices(airport, type, bookingReference) {
+  axios.defaults.xsrfCookieName = "csrftoken";
+  axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
   try {
     const response = await axios.get(
-      "http://127.0.0.1:8000/api/v1/airports/" +
+      "airports/" +
         airport +
         "/services/" +
         type +

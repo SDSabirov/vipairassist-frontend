@@ -44,7 +44,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import axios from "axios";
+import axios from "~/api/drf";
 const airports = ref([]);
 
 const isExpanded = ref(false);
@@ -59,7 +59,7 @@ const toggleExpanded = () => {
 const fetchAirports = async () => {
   try {
     const response = await axios.get(
-      `http://127.0.0.1:8000/api/v1/all-airports/`
+      `all-airports/`
     );
     airports.value = response.data; 
     console.log(airports)

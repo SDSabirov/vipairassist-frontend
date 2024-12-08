@@ -149,7 +149,7 @@
 <script setup>
 import { useBookingStore } from "@/stores/booking";
 import { useRoute } from "vue-router";
-import axios from "axios";
+import axios from "~/api/drf";
 import { watch, ref, onMounted, computed } from "vue";
 
 
@@ -179,7 +179,7 @@ const toggleContent = () => {
 const fetchAirportData = async () => {
   try {
     const response = await axios.get(
-      `http://127.0.0.1:8000/api/v1/top-airports/${slug.value}/`
+      `top-airports/${slug.value}/`
     );
     if (response.data && response.data[0]) {
       airportData.value = response.data[0];

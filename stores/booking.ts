@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import axios from "axios";
+import axios from "~/api/drf";
 
 // Type Definitions for Form Data
 type Airport = {
@@ -260,7 +260,7 @@ export const useBookingStore = defineStore("booking", {
       axios.defaults.xsrfCookieName = "csrftoken";
       axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
       try {
-        const response = await axios.post("http://127.0.0.1:8000/api/v1/create-booking-step1/", this.formData.step1);
+        const response = await axios.post("create-booking-step1/", this.formData.step1);
         this.bookingReference = response.data.booking_reference;
         console.log("Booking Reference:", this.bookingReference);
         console.log("Step 1 submitted successfully:", response.data);
@@ -277,7 +277,7 @@ export const useBookingStore = defineStore("booking", {
       this.loading = true;
       try {
         this.formData.step2.bookingReference = this.bookingReference
-        const response = await axios.post("http://127.0.0.1:8000/api/v1/create-booking-step2/", this.formData.step2);
+        const response = await axios.post("create-booking-step2/", this.formData.step2);
         this.totalPrice = response.data.total_price;
         this.extrasTotal = response.data.extras_total;
 
@@ -293,7 +293,7 @@ export const useBookingStore = defineStore("booking", {
       this.loading = true;
       try {
         this.formData.step3.bookingReference = this.bookingReference;
-        const response = await axios.post("http://127.0.0.1:8000/api/v1/create-booking-step3/", this.formData.step3,
+        const response = await axios.post("create-booking-step3/", this.formData.step3,
         );
         this.bookingConfirmed.bookingReference=response.data.booking_reference;
         this.bookingConfirmed.bookingStatus=response.data.booking_status;

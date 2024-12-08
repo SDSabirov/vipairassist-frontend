@@ -88,7 +88,7 @@
 
 <script setup>
 import { ref } from "vue";
-import axios from "axios";
+import axios from "~/api/drf";
 
 const name = ref("");
 const email = ref("");
@@ -117,7 +117,7 @@ const submitContactForm = async () => {
 
   try {
     const response = await axios.post(
-      "http://127.0.0.1:8000/api/v1/submit-contact/",
+      "submit-contact/",
       data
     );
     successMessage.value = "Your message has been submitted successfully!";

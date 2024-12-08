@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import axios from "axios";
+import axios from "~/api/drf";
 import { onMounted } from "vue";
 import { useRouter } from 'vue-router';
 
@@ -34,7 +34,7 @@ const initializePaypalButton = async () => {
   paypal.Buttons({
     createOrder: async function () {
       try {
-        const response = await axios.post("http://127.0.0.1:8000/api/v1/payments/create-order/", {
+        const response = await axios.post("payments/create-order/", {
           total: totalPrice, 
           currency: "USD",
         });
@@ -47,7 +47,7 @@ const initializePaypalButton = async () => {
 
     onApprove: async function (data) {
       try {
-        const response = await axios.post("http://127.0.0.1:8000/api/v1/payments/capture-order/", {
+        const response = await axios.post("payments/capture-order/", {
           orderID: data.orderID, // Pass EC-XXX to backend
         });
         if (response.status === 201) {
