@@ -40,4 +40,9 @@ export default defineNuxtConfig({
     description: `Experience unparalleled luxury and convenience with our global airport services. From personalized meet and greet assistance to exclusive VIP terminal access, we ensure seamless travel at airports worldwide. Whether you're a business traveler or seeking a premium journey, our professional concierge team is dedicated to making your airport experience effortless and enjoyable. Book now and elevate your travel to first-class comfort.`,
     defaultLocale: "en",
   },
+  robots: {
+    UserAgent: "*", // Applies to all user agents
+    Disallow: "/admin", // Disallow access to admin pages
+    Allow: "/", // Allow access to all other pages
+  },
 });
