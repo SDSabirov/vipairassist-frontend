@@ -21,7 +21,7 @@
         Experience travel like never before. Become a VIP AirAssist member and
         let us elevate your journey to new heights of luxury and comfort
       </h2>
-      <NuxtLink to="/">
+      <NuxtLink to="/membership/register">
         <button
           class="relative px-6 py-2 text-white bg-black/40 text-white text-2xl leading-[182%] border border-white group overflow-hidden"
         >

@@ -15,8 +15,9 @@ const router = useRouter();
 import { useBookingStore } from "@/stores/booking";
 
 const bookingStore = useBookingStore();
-const totalPrice = bookingStore.bookingConfirmed.totalPrice
-const loading = ref(true)
+const totalPrice = bookingStore.bookingConfirmed.totalPrice;
+const bookingRef = bookingStore.bookingConfirmed.bookingReference;
+const loading = ref(true);
 
 const loadPaypalScript = () => {
   return new Promise((resolve) => {
@@ -36,6 +37,7 @@ const initializePaypalButton = async () => {
       try {
         const response = await axios.post("payments/create-order/", {
           total: totalPrice, 
+          booking_ref: bookingRef,
           currency: "USD",
         });
         return response.data.id; // Return EC-XXX token
