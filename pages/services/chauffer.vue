@@ -3,10 +3,10 @@
     <Navbar />
     <ServicesServiceDetailHero :src="image" :page="page" />
     <section
-      class="bg-white flex flex-col w-full justify-center items-center py-14"
+      class="bg-white flex flex-col w-full justify-center items-center py-6 md:py-14"
     >
       <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-14 max-w-screen-xl px-2 lg:px-0 place-items-stretch"
+        class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-14 max-w-screen-xl px-4 md:px-0 lg:px-0 place-items-stretch"
       >
         <div class="flex-grow items-center">
           <p

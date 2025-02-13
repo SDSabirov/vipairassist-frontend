@@ -3,7 +3,7 @@
     <h1
       class="text-2xl md:text-4xl text-center font-semibold leading-2xl md:leading-[!00%] capitalize"
     >
-      What Our Clieants Say
+      What Our Clients Say
     </h1>
     <div class="flex flex-col justify-center items-center w-full relative overflow-hidden px-8 md:px-0">
       <!-- Left Arrow -->

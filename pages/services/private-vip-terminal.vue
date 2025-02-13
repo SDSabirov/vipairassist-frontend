@@ -3,14 +3,14 @@
       <Navbar />
       <ServicesServiceDetailHero :src="image" :page="page" />
       <section
-        class="bg-white flex flex-col w-full justify-center items-center py-14"
+        class="bg-white flex flex-col w-full justify-center items-center py-4 md:py-14"
       >
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-14 max-w-screen-xl px-2 lg:px-0 place-items-stretch">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-14 max-w-screen-xl px-2 lg:px-0 place-items-stretch px-4 md:px-0">
           <div class="flex-grow items-center">
             <p
               data-aos="fade-left"
               data-aos-duration="400"
-              class="text-[20px] md:text-[28px] text-justify mt-4 font-normal leading-[180%] md:mx-0 md:text-start w-full md:w-[590px] md:leading-[204%] text-[#4D4D4D]"
+              class="text-[20px] md:text-[28px] text-justify font-normal leading-[180%] md:mx-0 md:text-start w-full md:w-[590px] md:leading-[204%] text-[#4D4D4D]"
             >
               Our Airport "Meet and Greet Fast Track" services are intended to
               provide passengers with a smooth and hassle-free airport experience.

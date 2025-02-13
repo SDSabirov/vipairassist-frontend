@@ -25,7 +25,7 @@
       <div class="flex items-center justify-center py-6" v-if="bookingStore.currentStep==1">
         <button
           @click="handleStep1Submit()"
-          class="relative px-12 py-6 text-black border border-black text-2xl leading-[108%] group overflow-hidden"
+          class="relative px-6 md:px-12 py-6 text-black border border-black text-2xl leading-[108%] group overflow-hidden"
         >
           <span
             class="absolute inset-0 w-0 bg-black/70 transition-all duration-500 ease-in-out group-hover:w-full"
