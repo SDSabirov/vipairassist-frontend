@@ -5,7 +5,9 @@
     <section
       class="bg-white flex flex-col w-full justify-center items-center py-6 md:py-14"
     >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-14 max-w-screen-xl px-4 md:px-0 lg:px-0 place-items-stretch">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-14 max-w-screen-xl px-4 md:px-0 lg:px-0 place-items-stretch"
+      >
         <div class="flex-grow items-center">
           <p
             data-aos="fade-left"
@@ -44,14 +46,16 @@
           </p>
         </div>
       </div>
-      
     </section>
     <div class="flex flex flex-col items-center justify-center w-full py-10">
       <div class="max-w-screen-xl flex flex-col items-center w-full space-y-6">
-        <h4 class="uppercase text-2xl md:text-4xl font-medium text-6 md:leading-8 mb-6">Start Your Booking</h4>
-        <FormsBaseService/>
+        <h4
+          class="uppercase text-2xl md:text-4xl font-medium text-6 md:leading-8 mb-6"
+        >
+          Start Your Booking
+        </h4>
+        <FormsBaseService />
       </div>
-      
     </div>
     <Footer />
   </div>
@@ -63,14 +67,45 @@ import Navbar from "~/components/navbar.vue";
 
 const page = "Meet & Greet , Fast Track";
 useHead({
-    title: "Meet and Greet & Fast Track Airport Services – Skip the Lines and Travel in Comfort",
-    meta: [
-      {
-        name: "description",
-        content: `Enjoy a smooth and stress-free airport experience with our Meet and Greet and Fast Track services. Skip long lines, breeze through security, and receive personalized assistance from our expert concierges. Whether you're traveling for business or leisure, our premium service ensures that you start your journey with ease and comfort.`
-      },
-    ],
-  });
+  title:
+    "Meet and Greet & Fast Track Airport Services – Skip the Lines and Travel in Comfort",
+  meta: [
+    {
+      name: "description",
+      content: `Enjoy a smooth and stress-free airport experience with our Meet and Greet and Fast Track services. Skip long lines, breeze through security, and receive personalized assistance from our expert concierges. Whether you're traveling for business or leisure, our premium service ensures that you start your journey with ease and comfort.`,
+    },
+  ],
+});
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        
+        "provider": {
+          "@type": "Organization",
+          "name": "VIP AirAssist",
+          "url": "https://vipairassist.com",
+          "logo": "https://vipairassist.com/logo.svg",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+971506964878",
+            "contactType": "Customer Service",
+            "areaServed": "Worldwide",
+            "availableLanguage": ["English"]
+          },
+          "sameAs": [
+            "https://www.facebook.com/vipairassist",
+            
+          ]
+        }
+      })
+    }
+  ]
+})
 </script>
 
 <style lang="scss" scoped></style>

@@ -19,7 +19,6 @@
           <h3 class="text-2xl font-bold mb-4 leading-[182%]">LEARN MORE</h3>
           <ul class="space-y-2 text-xl">
             <!-- <li><a href="/about" class="hover:text-gray-300 ">Why Us?</a></li> -->
-            <li><a href="/how-it-works" class="hover:text-gray-300">How it works</a></li>
             <li><a href="/terms" class="hover:text-gray-300">Terms and Conditions</a></li>
             <li><a href="/faqs" class="hover:text-gray-300">FAQs</a></li>
           </ul>
@@ -39,7 +38,7 @@
   
       <!-- Footer Bottom -->
       <div class="border-t border-gray-600 mt-8 pt-4 text-center text-sm">
-        <p>&copy; 2024 VIP AirAssist. All rights reserved.</p>
+        <p>&copy; 2025 VIP AirAssist. All rights reserved.</p>
       </div>
     </footer>
   </template>

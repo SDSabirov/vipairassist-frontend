@@ -72,14 +72,44 @@ import Navbar from "~/components/navbar.vue";
 
 const page = " Chauffer Services";
 useHead({
-    title: "Chauffeur Airport Transfers – Luxury Travel with Personalized Comfort",
-    meta: [
-      {
-        name: "description",
-        content: `Arrive in style with our chauffeur services at airports worldwide. Our professional drivers provide luxury transfers, ensuring a seamless and comfortable experience from the airport to your destination. Relax in the back of a premium vehicle as we take care of your transportation needs, leaving you free to enjoy your travel.`
-      },
-    ],
-  });
+  title:
+    "Chauffeur Airport Transfers – Luxury Travel with Personalized Comfort",
+  meta: [
+    {
+      name: "description",
+      content: `Arrive in style with our chauffeur services at airports worldwide. Our professional drivers provide luxury transfers, ensuring a seamless and comfortable experience from the airport to your destination. Relax in the back of a premium vehicle as we take care of your transportation needs, leaving you free to enjoy your travel.`,
+    },
+  ],
+  script: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Chauffeur Services",
+        description:
+          "Luxury chauffeur services offering sustainable and regular airport transfers with professional drivers and premium vehicles.",
+        provider: {
+          "@type": "Organization",
+          name: "Vip Air Assist",
+          url: "https://vipairassist.com", // Replace with your actual URL
+          logo: "https://vipairassist.com/logo.svg", 
+        },
+        areaServed: {
+          "@type": "Place",
+          name: "Worldwide",
+        },
+        serviceType: "Luxury Chauffeur Transfers",
+        availableChannel: {
+          "@type": "ServiceChannel",
+          serviceUrl: "https://vipairassist.com/services/chauffeur", 
+        },
+        
+        
+      }),
+    },
+  ],
+});
 </script>
 
 <style lang="scss" scoped></style>

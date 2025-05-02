@@ -237,10 +237,37 @@ watch(
 const handleServiceChange = (service) => {
   selectedService.value = service;
 };
-
+const jsonLd = computed(() => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": `Meet & Greet Service at ${airportData.name}`,
+  "description": airportData.about_field,
+  "provider": {
+    "@type": "Organization",
+    "name": "VIP AirAssist",
+    "url": "https://vipairassist.com"
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": airportData.name,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": airportData.city,
+      "addressCountry": airportData.country
+    }
+  }
+}))
 // Fetch data and set meta tags on component mount
 onMounted(() => {
   fetchAirportData();
+  useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify(jsonLd.value)
+    }
+  ]
+})
 });
 </script>
 

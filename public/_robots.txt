@@ -1,4 +1,7 @@
 User-agent: *
 Disallow: /admin
 Allow: /
+Disallow: /booking/not-confirmed
+Disallow: /booking/success
+Disallow: /booking/payment
 Sitemap: https://vipairassist.com/sitemap.xml

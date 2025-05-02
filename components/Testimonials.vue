@@ -50,9 +50,9 @@
                   <h3 class="text-[14px] font-bold leading-[19px]">
                     {{ testimonial.name }}
                   </h3>
-                  <p class="text-[14px] font-normal leading-[19px] mt-1">
+                  <!-- <p class="text-[14px] font-normal leading-[19px] mt-1">
                     {{ testimonial.date }}
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
@@ -91,33 +91,33 @@ import { ref, computed, onMounted, onUnmounted } from "vue";
 
 const testimonials = ref([
   {
-    name: "– John D",
+    name: "Nadia E.",
     date: "November 15, 2024",
-    message: "VIPAIRASSIST transformed my travel experience! From fast-tracking through security at Heathrow to the luxurious lounge access, everything was seamless and stress-free",
+    message: "VIPAIRASSIST totally changed the way I travel! Skipped the security lines at Heathrow, relaxed in a fancy lounge—everything was smooth and stress-free.",
     image: "/path-to-avatar1.jpg",
   },
   {
-    name: " – James R",
+    name: " Khalid R.",
     date: "November 2, 2024",
-    message: "The VIP service at LAX was incredible! No waiting in lines, and the personal concierge made sure I was comfortable throughout the process. Will definitely use VIPAIRASSIST again!",
+    message: "The VIP service at LAX was amazing! No lines, no hassle, and the concierge took care of everything. Definitely using VIPAIRASSIST again!",
     image: "/path-to-avatar5.jpg",
   },
   {
-    name: "– Sarah T",
+    name: "Lars B.",
     date: "October 8, 2024",
-    message: "Traveling with kids can be challenging, but VIPAIRASSIST made it a breeze. They handled all our luggage, got us through security in minutes, and even had a play area in the lounge!",
+    message: "Arriving in Dubai was smooth and stress-free thanks to VIPAIRASSIST! They handled everything while I relaxed in a private suite before my next flight. Amazing service!",
     image: "/path-to-avatar2.jpg",
   },
   {
-    name: "– Catherine L",
+    name: "Anastasia K.",
     date: "October 5, 2024",
-    message: "Arriving at Dubai International, I was greeted with first-class service. The VIPAIRASSIST team handled all the details so I could relax in their private suite before my connection.",
+    message: "Traveling with kids can be challenging, but VIPAIRASSIST made it a breeze. They handled all our luggage, got us through security in minutes, and even had a play area in the lounge!",
     image: "/path-to-avatar4.jpg",
   },
   {
-    name: " – Michael B",
+    name: " Nikolai Z.",
     date: "September 10, 2024",
-    message: "As a frequent business traveler, time is everything. VIPAIRASSIST helped me get through check-in and security at JFK in record time, leaving me plenty of time to relax before my flight",
+    message: "As a frequent business traveler, every minute counts. I’ve used VIPAIRASSIST three times now, and they never disappoint! They got me through check-in and security at Istanbul in record time, leaving me plenty of time to relax before my flight",
     image: "/path-to-avatar3.jpg",
   },
   

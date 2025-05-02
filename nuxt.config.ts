@@ -18,9 +18,12 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       "Playfair+Display": [400, 500, 700],
-      "Open+Sans": [300, 400, 600], // For multi-word font names
+      "Open+Sans": [300, 400, 600], 
     },
-    display: "swap", // Optional: Controls font-display behavior
+    display: "swap", 
+    preload: true, 
+    preconnect: true,
+    inject: true,
   },
   css: ["~/assets/css/main.css", "boxicons/css/boxicons.min.css"],
   postcss: {

@@ -34,6 +34,7 @@ import { useFlowbite } from "~/composables/useFlowbite";
 import { useBookingStore } from '@/stores/booking';
 
 const bookingStore = useBookingStore();
+
 // Props and Emit
 defineProps(["modelValue"]);
 const emit = defineEmits(["update:modelValue"]);
@@ -44,11 +45,13 @@ const datepickerInput = ref(null);
 // Flowbite Datepicker Initialization
 onMounted(() => {
   useFlowbite(() => {
+    const today = new Date();
+
     const datepicker = new Datepicker(datepickerInput.value, {
-      autohide: true, // Optional: Auto-hide on date select
+      autohide: true,
+      minDate: today, // <-- This sets the minimum selectable date to today
     });
 
-    // Sync Flowbite Datepicker value with v-model
     datepickerInput.value.addEventListener("changeDate", (e) => {
       emit("update:modelValue", e.target.value);
     });
