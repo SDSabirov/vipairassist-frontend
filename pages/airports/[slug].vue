@@ -155,7 +155,7 @@ import { watch, ref, onMounted, computed } from "vue";
 
 const bookingStore = useBookingStore();
 const route = useRoute();
-const slug = ref(route.params.slug);
+const slug    = computed(() => route.params.airport || route.params.slug)
 
 let airportData = ref(null);
 const loading = ref(true);
@@ -177,24 +177,24 @@ const toggleContent = () => {
 
 // Fetch airport data
 const fetchAirportData = async () => {
+  loading.value = true
   try {
-    const response = await axios.get(
-      `top-airports/${slug.value}/`
-    );
-    if (response.data && response.data[0]) {
-      airportData.value = response.data[0];
-      selectedServices.value = airportData.value.arrival_services || [];
-      selectedService.value = selectedServices.value[0] || null;
+    const { data } = await axios.get(
+      `/top-airports/${encodeURIComponent(slug.value)}/`
+    )
+    // Detail endpoint returns an object, not an array
+    airportData.value      = data
+    selectedServices.value = data.arrival_services  || []
+    selectedService.value  = selectedServices.value[0] || null
 
-      // Set initial meta tags
-      updateMetaTags();
-    }
+    // Update meta-tags now that airportData is set
+    updateMetaTags()
   } catch (error) {
-    console.error("Error fetching airport data:", error);
+    console.error("Error fetching airport data:", error)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 
 // Update meta tags dynamically
 const updateMetaTags = () => {
@@ -259,6 +259,7 @@ const jsonLd = computed(() => ({
 }))
 // Fetch data and set meta tags on component mount
 onMounted(() => {
+  console.log(slug.value)
   fetchAirportData();
   useHead({
   script: [

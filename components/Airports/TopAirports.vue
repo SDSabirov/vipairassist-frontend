@@ -42,7 +42,7 @@
               class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4"
             >
               <!-- Card -->
-              <NuxtLink :to="`/airports/${item.name.replace(/\s+/g, '-')}`">
+              <NuxtLink :to="`/airports/${item.link.toLowerCase()}`">
                 <div 
                   class="h-[500px] flex flex-col bg-black rounded-xl overflow-hidden group "
                 >
