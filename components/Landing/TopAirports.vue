@@ -1,108 +1,148 @@
 <template>
-  <section class="w-full flex flex-col justify-center items-center py-10 relative overflow-hidden">
-    <!-- Background Image -->
-    <img
-      class="object-fit absolute top-0 -z-10 w-full h-full"
-      src="/assets/images/backgrounds/topairports.webp"
-      alt="background airports section"
-    />
+  <section class="w-full flex flex-col justify-center items-center py-12 md:py-16 relative overflow-hidden">
+    <!-- Optimized Background Image -->
+    <div class="absolute inset-0 -z-10">
+      <img
+        class="w-full h-full object-cover"
+        src="/assets/images/backgrounds/topairports.webp"
+        alt="background airports section"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-black/40"></div>
+    </div>
 
     <!-- Section Title -->
-    <h2 class="text-2xl md:text-6xl text-center font-medium leading-xl md:leading-4xl uppercase text-white my-4">
-      Our Top Airports
-    </h2>
+    <div class="text-center mb-8 md:mb-12 px-4">
+      <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-wide">
+        Our Top Airports
+      </h2>
+      <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+        Discover premium VIP services at the world's leading airports
+      </p>
+    </div>
 
-    <!-- Divider -->
-    <div class="border bg-white w-1/6 h-2 mb-8"></div>
+    <!-- Modern Divider -->
+    <div class="w-24 h-1 bg-gradient-to-r from-transparent via-white to-transparent mb-8 md:mb-12"></div>
 
     <!-- Loading Spinner -->
     <LoadingAnimationWhite v-if="loading" />
 
-    <!-- Carousel -->
-    <div v-else ref="carouselRef" class="flex flex-col w-full relative items-center justify-center px-8 md:px-0">
+    <!-- Enhanced Carousel -->
+    <div v-else ref="carouselRef" class="flex flex-col w-full relative items-center justify-center px-4 md:px-8">
       <!-- Left Arrow -->
       <button
         @click="prevSlide"
-        class="absolute top-1/2 left-2 md:left-12 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700 z-10"
+        class="absolute top-1/2 left-2 md:left-8 transform -translate-y-1/2 p-3 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-all duration-300 z-10 border border-white/20"
         :disabled="currentIndex === 0"
+        :class="{ 'opacity-50 cursor-not-allowed': currentIndex === 0 }"
         aria-label="Previous slide"
       >
         <i class="bx bx-chevron-left text-2xl"></i>
       </button>
 
-      <!-- Visible Slides Only -->
-      <div class="w-full max-w-screen-xl flex">
-        <div
-          v-for="(item, index) in visibleItems"
-          :key="index"
-          class="w-full md:w-1/2 lg:w-1/3 px-4 transition-opacity duration-500"
-        >
-          <NuxtLink :to="`/airports/${item.link}`">
-            <div class="h-[500px] flex flex-col bg-white rounded-xl overflow-hidden group">
-              <!-- Image with loading -->
-              <div class="relative h-[60%] bg-cover bg-center bg-black/60">
-                <div
-                  v-if="!imageLoaded[index]"
-                  class="absolute inset-0 flex items-center justify-center bg-gray-200"
-                >
-                  <LoadingAnimationWhite />
+      <!-- Improved Card Grid -->
+      <div class="w-full max-w-7xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div
+            v-for="(item, index) in visibleItems"
+            :key="index"
+            class="transition-all duration-500 transform hover:scale-105"
+          >
+            <NuxtLink :to="`/airports/${item.link}`">
+              <div class="bg-white overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group h-full flex flex-col">
+                <!-- Optimized Image Container -->
+                <div class="relative h-64 md:h-56 overflow-hidden">
+                  <div
+                    v-if="!imageLoaded[index]"
+                    class="absolute inset-0 flex items-center justify-center bg-gray-100"
+                  >
+                    <div class="animate-pulse bg-gray-300 w-full h-full"></div>
+                  </div>
+                  <img
+                    loading="lazy"
+                    v-if="item.cover_image_url"
+                    :src="item.cover_image_url"
+                    :alt="`${item.name}, ${item.city}, ${item.country}`"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    @load="markImageLoaded(index)"
+                    @error="markImageLoaded(index)"
+                  />
+                  <!-- Gradient Overlay -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
-                <img
-                  loading="lazy"
-                  v-if="item.cover_image_url"
-                  :src="item.cover_image_url"
-                  :alt="`${item.name}, ${item.city}, ${item.country}`"
-                  class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-300"
-                  @load="markImageLoaded(index)"
-                  @error="markImageLoaded(index)"
-                />
-              </div>
 
-              <!-- Details -->
-              <div class="h-[40%] p-4">
-                <h3 class="text-xl lg:text-2xl font-semibold text-gray-600 group-hover:text-gray-800 transition-all duration-300">
-                  {{ item.name }}, {{ item.city }}, {{ item.country }}
-                </h3>
-                <p class="text-sm md:text-base lg:text-lg text-gray-600 mt-2">
-                  {{ item.description }}
-                </p>
+                <!-- Enhanced Content -->
+                <div class="flex-1 p-6 flex flex-col justify-between">
+                  <div>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300 mb-2 line-clamp-2">
+                      {{ item.name }}
+                    </h3>
+                    <div class="flex items-center text-gray-500 mb-3">
+                      <i class="bx bx-map text-blue-500 mr-2"></i>
+                      <span class="text-sm font-medium">{{ item.city }}, {{ item.country }}</span>
+                    </div>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed line-clamp-3">
+                      {{ item.description }}
+                    </p>
+                  </div>
+                  
+                  <!-- CTA -->
+                  <div class="mt-4 pt-4 border-t border-gray-100">
+                    <span class="text-blue-600 font-semibold text-sm group-hover:text-blue-700 transition-colors duration-300">
+                      Explore Services →
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </NuxtLink>
+            </NuxtLink>
+          </div>
         </div>
       </div>
 
       <!-- Right Arrow -->
       <button
         @click="nextSlide"
-        class="absolute top-1/2 right-2 md:right-12 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700 z-10"
+        class="absolute top-1/2 right-2 md:right-8 transform -translate-y-1/2 p-3 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-all duration-300 z-10 border border-white/20"
         :disabled="currentIndex === maxIndex"
+        :class="{ 'opacity-50 cursor-not-allowed': currentIndex === maxIndex }"
         aria-label="Next slide"
       >
         <i class="bx bx-chevron-right text-2xl"></i>
       </button>
 
-      <!-- Pagination -->
-      <div class="flex justify-center mt-4 space-x-2">
-        <span
+      <!-- Enhanced Pagination -->
+      <div class="flex justify-center mt-8 space-x-3">
+        <button
           v-for="page in totalPages"
           :key="page"
           @click="currentIndex = page - 1"
           :class="[
-            'w-3 h-3 rounded-full cursor-pointer',
-            page - 1 === currentIndex ? 'bg-gray-800' : 'bg-gray-300'
+            'w-3 h-3 rounded-full cursor-pointer transition-all duration-300',
+            page - 1 === currentIndex 
+              ? 'bg-white scale-125 shadow-lg' 
+              : 'bg-white/50 hover:bg-white/75'
           ]"
-        ></span>
+        ></button>
       </div>
 
-      <!-- CTA Button -->
-      <div class="flex justify-center items-center mt-4 py-4">
-        <a
-          href="/airports"
-          class="text-black text-2xl py-4 px-6 bg-white hover:bg-black hover:text-white"
+      <!-- Enhanced CTA Button -->
+      <div class="flex justify-center items-center mt-8 md:mt-12">
+        <NuxtLink
+          to="/airports"
+          class="group relative overflow-hidden bg-white text-gray-800 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
         >
-          Explore All Airports
-        </a>
+          <span class="relative z-10 flex items-center">
+            Explore All Airports
+            <i class="bx bx-right-arrow-alt ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+          </span>
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+          <span class="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span class="flex items-center">
+              Explore All Airports
+              <i class="bx bx-right-arrow-alt ml-2"></i>
+            </span>
+          </span>
+        </NuxtLink>
       </div>
     </div>
   </section>

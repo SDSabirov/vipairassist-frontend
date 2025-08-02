@@ -7,7 +7,37 @@ export default defineNuxtConfig({
     "@": resolve(__dirname),
     "~": resolve(__dirname),
   },
-  modules: ["@nuxtjs/seo", "nuxt-gtag", "@pinia/nuxt", "@nuxtjs/google-fonts",],
+  modules: ["@nuxtjs/seo", "nuxt-gtag", "@pinia/nuxt", "@nuxtjs/google-fonts", "@nuxt/image"],
+
+  image: {
+    quality: 80,
+    format: ['webp', 'jpg'],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536
+    },
+    densities: [1, 2],
+    presets: {
+      background: {
+        modifiers: {
+          format: 'webp',
+          quality: 70,
+          fit: 'cover'
+        }
+      },
+      card: {
+        modifiers: {
+          format: 'webp',
+          quality: 85,
+          fit: 'cover'
+        }
+      }
+    }
+  },
 
   runtimeConfig: {
     public: {

@@ -5,26 +5,58 @@
 
     <!-- Blog Content Section -->
     <section
-      class="bg-white flex flex-col w-full justify-center items-center py-12 mt-10 mb-8"
+      class="bg-white flex flex-col w-full justify-center items-center py-8 md:py-12 mt-6 md:mt-10 mb-6 md:mb-8"
     >
-      <div v-if="blog" class="max-w-screen-lg px-4">
-        <h1 class="text-3xl font-bold mb-6">{{ blog.title }}</h1>
-        <p class="text-gray-600 mb-4">{{ blog.date }}</p>
-        <p
-          v-for="(paragraph, index) in blog.content.split('\n')"
-          :key="index"
-          class="text-lg text-gray-800 leading-7 mb-6"
-        >
-          {{ paragraph }}
-        </p>
+      <!-- Loading state -->
+      <div v-if="loading" class="flex justify-center items-center py-20">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      </div>
+
+      <!-- Blog content -->
+      <div v-else-if="blog" class="max-w-screen-lg px-4 md:px-6 w-full">
+        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 leading-tight">{{ blog.title }}</h1>
+        <p class="text-gray-600 mb-6 md:mb-8 text-sm md:text-base">{{ blog.date }}</p>
+        
+        <!-- Blog image -->
+        <div class="mb-6 md:mb-8">
+          <img
+            :src="blog.image"
+            :alt="blog.title"
+            class="w-full h-48 md:h-64 lg:h-80 object-cover"
+            loading="lazy"
+          />
+        </div>
+        
+        <div class="prose prose-sm md:prose-lg max-w-none">
+          <p
+            v-for="(paragraph, index) in blog.content.split('\n')"
+            :key="index"
+            class="text-base md:text-lg text-gray-800 leading-7 md:leading-8 mb-4 md:mb-6"
+          >
+            {{ paragraph }}
+          </p>
+        </div>
+        
+        <!-- Back to blogs button for mobile -->
+        <div class="mt-8 md:mt-12">
+          <router-link 
+            to="/blogs" 
+            class="inline-flex items-center px-4 py-2 bg-gray-900 text-white hover:bg-gray-800 transition-colors duration-200"
+          >
+            ← Back to Blogs
+          </router-link>
+        </div>
       </div>
 
       <!-- Fallback if blog not found -->
-      <div v-else class="text-center text-red-600 font-semibold">
-        <p>Blog not found!</p>
-        <router-link to="/blogs" class="text-blue-600 hover:underline"
-          >Back to Blogs</router-link
+      <div v-else class="text-center text-red-600 font-semibold px-4">
+        <p class="text-lg mb-4">Blog not found!</p>
+        <router-link 
+          to="/blogs" 
+          class="inline-flex items-center px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200"
         >
+          Back to Blogs
+        </router-link>
       </div>
     </section>
 
@@ -129,24 +161,33 @@ const blog = ref(null);
 const route = useRoute();
 let image = ref(null);
 let page = ref(null);
+const loading = ref(true);
 
 
 onMounted(() => {
-  const slug = route.params.slug;
-  blog.value = blogs.find((item) => item.slug === slug);
-  image = ref(blog.value.image);
-  page = ref(blog.value.title);
-  if (!blog.value) {
-    console.error("Blog not found!");
-  }
-  useHead({
-    title: blog.value.title,
-    meta: [
-      {
-        name: "description",
-        content: blog.value.content.slice(0, 160), // Limit description length
-      },
-    ],
-  });
+  // Simulate loading
+  setTimeout(() => {
+    const slug = route.params.slug;
+    blog.value = blogs.find((item) => item.slug === slug);
+    
+    if (blog.value) {
+      image = ref(blog.value.image);
+      page = ref(blog.value.title);
+      
+      useHead({
+        title: blog.value.title,
+        meta: [
+          {
+            name: "description",
+            content: blog.value.content.slice(0, 160), // Limit description length
+          },
+        ],
+      });
+    } else {
+      console.error("Blog not found!");
+    }
+    
+    loading.value = false;
+  }, 300);
 });
 </script>

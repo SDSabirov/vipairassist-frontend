@@ -1,27 +1,31 @@
 <template>
-  <div class="w-full h-full mx-auto">
-    <div class="relative h-full">
+  <div class="w-full mx-auto">
+    <div class="relative">
       <!-- Input Field -->
       <input
         v-model="query"
         type="text"
-        placeholder="Enter airport name..."
-        class="w-full h-full p-3 bg-gray-200 text-gray-600 text-sm focus:outline-none focus:ring focus:ring-black"
-        :class="bookingStore.errors.airport || bookingStore.errors.airportSecondary ? 'border-red-500 ring-red-500' : ''"
+        placeholder="Enter airport name or city..."
+        class="w-full p-4 border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-black focus:border-transparent transition-all duration-200"
+        :class="bookingStore.errors.airport || bookingStore.errors.airportSecondary ? 'border-red-400 focus:ring-red-400' : ''"
         @input="fetchAirports"
       />
 
       <!-- Suggestions Dropdown -->
       <ul
         v-if="loading || airports.length > 0"
-        class="absolute left-0 right-0 bg-white border border-gray-300 rounded-sm mt-1 max-h-60 overflow-y-auto z-20"
+        class="absolute left-0 right-0 bg-white border border-gray-300 mt-1 max-h-60 overflow-y-auto z-20 shadow-lg"
       >
         <!-- Loading State -->
-        <li v-if="loading" class="p-2 text-gray-500">Loading...</li>
+        <li v-if="loading" class="p-3 text-gray-500 flex items-center">
+          <i class="bx bx-loader-alt animate-spin mr-2"></i>
+          Searching airports...
+        </li>
 
         <!-- No Results Found -->
-        <li v-if="!loading && airports.length === 0" class="p-2 text-gray-500">
-          No results found.
+        <li v-if="!loading && airports.length === 0 && query.length > 2" class="p-3 text-gray-500">
+          <i class="bx bx-search mr-2"></i>
+          No airports found for "{{ query }}"
         </li>
 
         <!-- Airport Suggestions -->
@@ -30,10 +34,11 @@
           :key="index"
           @click="selectAirport(airport)"
           @keydown.enter="selectAirport(airport)"
-          class="p-2 hover:bg-blue-100 cursor-pointer"
+          class="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0 transition-colors duration-200"
           tabindex="0"
         >
-          {{ airport.city }}, {{ airport.name }}, {{ airport.country }} ({{ airport.code }})
+          <div class="font-medium text-gray-900">{{ airport.name }}</div>
+          <div class="text-sm text-gray-600">{{ airport.city }}, {{ airport.country }} ({{ airport.code }})</div>
         </li>
       </ul>
     </div>

@@ -15,8 +15,9 @@ const router = useRouter();
 import { useBookingStore } from "@/stores/booking";
 
 const bookingStore = useBookingStore();
-const totalPrice = bookingStore.bookingConfirmed.totalPrice;
-const bookingRef = bookingStore.bookingConfirmed.bookingReference;
+// Use current pricing and booking reference, not confirmed ones
+const totalPrice = bookingStore.totalPrice + bookingStore.extrasTotal;
+const bookingRef = bookingStore.bookingReference;
 const loading = ref(true);
 
 const loadPaypalScript = () => {
@@ -49,22 +50,29 @@ const initializePaypalButton = async () => {
 
     onApprove: async function (data) {
       try {
-        const response = await axios.post("payments/capture-order/", {
-          orderID: data.orderID, // Pass EC-XXX to backend
+        // Process payment and finalize booking in single backend call
+        const result = await bookingStore.processPaymentAndFinalize({
+          payment_method: 'paypal',
+          payment_data: {
+            orderID: data.orderID,
+            payerID: data.payerID
+          }
         });
-        if (response.status === 201) {
+        
+        if (result.payment_status === 'PAID' && result.booking_status === 'CONFIRMED') {
           router.push("/booking/success");
         } else {
-          alert("Payment capture failed!");
+          alert("Payment processing failed. Please try again.");
         }
       } catch (error) {
-        console.error("Error capturing order:", error);
-        alert("Error occurred during payment capture.");
+        console.error("Error processing payment:", error);
+        alert("Error occurred during payment processing.");
       }
     },
 
     onCancel: function () {
       console.warn("Payment cancelled by the user.");
+      router.push("/booking/cancel");
     },
 
     onError: function (err) {

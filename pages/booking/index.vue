@@ -6,8 +6,8 @@
             <h1 class="text-4xl md:text-6xl text-white absolute top-1/3">Start Your Booking</h1>
             
         </div>
-        <section class="flex flex flex-col w-full items-center justify-center relative bg-white px-2 md:px-0">
-            <div class="relative -top-[450px]">
+        <section class="flex flex flex-col w-full items-center justify-center relative bg-white px-4 md:px-8">
+            <div class="relative -top-[450px] w-full max-w-7xl">
                 <FormsBookingForm />
             </div>
         </section>
