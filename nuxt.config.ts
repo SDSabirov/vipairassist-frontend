@@ -41,8 +41,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      paypalClientId: process.env.PAYPAL_CLIENT_ID, 
-      API_BASE_URL: process.env.API_BASE_URL
+      paypalClientId: process.env.PAYPAL_CLIENT_ID,
+      API_BASE_URL: process.env.API_BASE_URL,
+      turnstileSiteKey: process.env.TURNSTILE_SITE_KEY
     },
   },
   googleFonts: {
@@ -75,6 +76,11 @@ export default defineNuxtConfig({
                       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
                       })(window,document,'script','dataLayer','GTM-TFJP8PNX');`,
           type: 'text/javascript',
+        },
+        {
+          src: 'https://challenges.cloudflare.com/turnstile/v0/api.js',
+          async: true,
+          defer: true,
         }
       ],
     },
