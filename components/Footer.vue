@@ -7,7 +7,7 @@
           <p>Tel: <a href="tel:+971506964878" class="hover:text-gray-300">+971506964878</a></p>
           <p>Email: <a href="mailto:info@vipairassist.com" class="hover:text-gray-300">info@vipairassist.com</a></p>
           <p class="mt-4">
-            VIPairassist FZ-LLC<br />
+            VIPAirAssit FZ-LLC<br />
             FDRK5254 Compass Building, Al Shohada Road,<br />
             AL Hamra Industrial Zone-FZ, Ras Al Khaimah,<br />
             United Arab Emirates
@@ -38,7 +38,7 @@
   
       <!-- Footer Bottom -->
       <div class="border-t border-gray-600 mt-8 pt-4 text-center text-sm">
-        <p>&copy; 2025 VIP AirAssist. All rights reserved.</p>
+        <p>&copy; 2025 VIPAirAssit. All rights reserved.</p>
       </div>
     </footer>
   </template>
