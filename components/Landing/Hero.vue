@@ -14,43 +14,48 @@
         </div>
       </div>
 
-      <!-- Optimized Fallback Image -->
-      <img
-        v-show="!videoReady || isMobile"
+      <!-- Fallback Image - shows while video loads -->
+      <NuxtImg
+        v-show="!videoReady"
         src="/assets/images/backgrounds/fasttracksign.webp"
         alt="Airport VIP Services - Premium Concierge Experience"
         class="w-full h-full object-cover transition-opacity duration-700 ease-in-out"
         :class="{
-          'opacity-0': videoReady && !isMobile,
-          'opacity-100': !videoReady || isMobile,
+          'opacity-0': videoReady,
+          'opacity-100': !videoReady,
         }"
         loading="eager"
         width="1920"
         height="1080"
+        sizes="100vw sm:100vw md:100vw lg:100vw"
+        format="webp"
+        quality="75"
         @load="onImageLoad"
         @error="onImageError"
       />
 
-      <!-- Desktop Video with optimized loading -->
-      <video
-        v-if="!isMobile && isVisible"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        @loadeddata="onVideoReady"
-        @error="onVideoError"
-        class="w-full h-full object-cover absolute top-0 left-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.25, 1, 0.5, 1)]"
-        :class="{
-          'translate-x-0 opacity-100': videoReady,
-          'translate-x-full opacity-0': !videoReady,
-        }"
-      >
-        <source src="/assets/video/mainvideo.webm" type="video/webm" />
-        <source src="/assets/video/mainvideo.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <!-- Video - Desktop: High quality WebM | Mobile: Lower quality MP4 -->
+      <ClientOnly>
+        <video
+          v-if="isHydrated && isVisible"
+          :key="videoSrc"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          @loadeddata="onVideoReady"
+          @error="onVideoError"
+          class="hero-video w-full h-full object-cover absolute top-0 left-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.25, 1, 0.5, 1)]"
+          :class="{
+            'translate-x-0 opacity-100': videoReady,
+            'translate-x-full opacity-0': !videoReady,
+          }"
+        >
+          <source :src="videoSrc" :type="videoType" />
+          Your browser does not support the video tag.
+        </video>
+      </ClientOnly>
     </div>
 
     <!-- Overlay -->
@@ -133,13 +138,27 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 
 const showScrollHint = ref(true);
 const isVisible = ref(false);
 const videoReady = ref(false);
 const isMobile = ref(false);
 const imageLoaded = ref(false);
+const isHydrated = ref(false);
+
+// S3 video URLs
+const S3_VIDEO_DESKTOP = 'https://vip-air.s3.eu-central-1.amazonaws.com/mainvideo.webm';
+const S3_VIDEO_MOBILE = 'https://vip-air.s3.eu-central-1.amazonaws.com/mainvideo.mp4';
+
+// Select video source based on device
+const videoSrc = computed(() => {
+  return isMobile.value ? S3_VIDEO_MOBILE : S3_VIDEO_DESKTOP;
+});
+
+const videoType = computed(() => {
+  return isMobile.value ? 'video/mp4' : 'video/webm';
+});
 
 const hideScrollHintOnScroll = () => {
   if (window.scrollY > 100) showScrollHint.value = false;
@@ -171,7 +190,13 @@ const onVideoError = () => {
 };
 
 onMounted(() => {
-  isMobile.value = window.innerWidth <= 768;
+  // Detect mobile to load appropriate video quality
+  isMobile.value = window.innerWidth <= 768 ||
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  // Mark as hydrated - enables video loading
+  isHydrated.value = true;
+
   window.addEventListener("scroll", handleScroll);
   window.addEventListener("scroll", hideScrollHintOnScroll);
   handleScroll(); // Run once
