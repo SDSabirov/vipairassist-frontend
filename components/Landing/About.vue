@@ -3,12 +3,14 @@
     class="bg-white w-full flex flex-col justify-center items-center py-12"
   >
     <div class="grid grid-cols-1 md:grid-cols-2 max-w-screen-xl justify-between">
-      <div class="flex w-full h-full  overflow-hidden">
+      <div class="flex w-full h-full overflow-hidden">
         <img
           src="/assets/images/backgrounds/about.webp"
-          class="object-cover  hover:scale-110 transition-all duartion-800 ease-in"
+          class="object-cover hover:scale-110 transition-all duration-800 ease-in"
           alt="About Us Image"
-          load="lazy"
+          loading="lazy"
+          width="800"
+          height="600"
         />
       </div>
       <div class="flex flex-col p-4 space-y-4">

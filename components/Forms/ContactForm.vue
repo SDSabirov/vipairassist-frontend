@@ -74,17 +74,6 @@
         />
       </div>
 
-      <!-- Cloudflare Turnstile widget -->
-      <div class="flex justify-center w-full">
-        <div
-          ref="turnstileElement"
-          class="cf-turnstile"
-          :data-sitekey="config.public.turnstileSiteKey"
-          data-callback="onTurnstileSuccess"
-          data-theme="light"
-        ></div>
-      </div>
-
       <div class="flex w-full items-center justify-center py-12">
         <button
           :disabled="loading || isRateLimited"
@@ -115,9 +104,6 @@
 import { ref, computed, onMounted } from "vue";
 import axios from "~/api/drf";
 
-// Get runtime config for Turnstile site key
-const config = useRuntimeConfig();
-
 // Form fields
 const name = ref("");
 const email = ref("");
@@ -126,10 +112,8 @@ const message = ref("");
 
 // Anti-bot protection fields
 const honeypot = ref(""); // Honeypot field - should remain empty
-const turnstileToken = ref(""); // Turnstile verification token
 const formStartTime = ref(0); // Track when form was loaded
 const lastSubmitTime = ref(0); // Track last submission time
-const turnstileElement = ref(null); // Reference to Turnstile widget element
 
 // UI state
 const loading = ref(false);
@@ -147,16 +131,9 @@ const isRateLimited = computed(() => {
   return timeSinceLastSubmit < RATE_LIMIT_MS;
 });
 
-// Initialize form start time and set up Turnstile callback
+// Initialize form start time
 onMounted(() => {
   formStartTime.value = Date.now();
-
-  // Set up global callback for Turnstile
-  if (typeof window !== 'undefined') {
-    window.onTurnstileSuccess = (token) => {
-      turnstileToken.value = token;
-    };
-  }
 });
 
 const submitContactForm = async () => {
@@ -189,20 +166,12 @@ const submitContactForm = async () => {
       return;
     }
 
-    // Anti-bot validation layer 4: Turnstile verification
-    if (!turnstileToken.value) {
-      errorMessage.value = "Please complete the verification challenge.";
-      loading.value = false;
-      return;
-    }
-
-    // Prepare form data with Turnstile token
+    // Prepare form data
     const data = {
       name: name.value,
       email: email.value,
       subject: subject.value,
       message: message.value,
-      turnstile_token: turnstileToken.value, // Include token for backend verification
     };
 
     // Configure CSRF token for Django
@@ -223,12 +192,6 @@ const submitContactForm = async () => {
     subject.value = "";
     message.value = "";
     honeypot.value = "";
-    turnstileToken.value = "";
-
-    // Reset Turnstile widget
-    if (typeof window !== 'undefined' && window.turnstile) {
-      window.turnstile.reset();
-    }
 
     // Reset form start time for next submission
     formStartTime.value = Date.now();

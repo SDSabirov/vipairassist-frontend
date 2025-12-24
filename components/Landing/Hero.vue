@@ -25,6 +25,8 @@
           'opacity-100': !videoReady || isMobile,
         }"
         loading="eager"
+        width="1920"
+        height="1080"
         @load="onImageLoad"
         @error="onImageError"
       />

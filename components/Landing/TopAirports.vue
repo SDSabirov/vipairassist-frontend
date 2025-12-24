@@ -7,6 +7,8 @@
         src="/assets/images/backgrounds/topairports.webp"
         alt="background airports section"
         loading="lazy"
+        width="1920"
+        height="800"
       />
       <div class="absolute inset-0 bg-black/40"></div>
     </div>
@@ -59,11 +61,13 @@
                     <div class="animate-pulse bg-gray-300 w-full h-full"></div>
                   </div>
                   <img
-                    loading="lazy"
                     v-if="item.cover_image_url"
                     :src="item.cover_image_url"
                     :alt="`${item.name}, ${item.city}, ${item.country}`"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                    width="400"
+                    height="256"
                     @load="markImageLoaded(index)"
                     @error="markImageLoaded(index)"
                   />

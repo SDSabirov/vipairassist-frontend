@@ -4,7 +4,11 @@
       "Bash(dir /b:*)",
       "Bash(npm uninstall:*)",
       "Bash(npm install:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(xargs:*)",
+      "Bash(del blog3.webp)",
+      "Bash(move blog3_new.webp blog3.webp)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []

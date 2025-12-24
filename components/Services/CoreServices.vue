@@ -30,6 +30,8 @@
             alt="Meet & Greet Fast Track Services"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
+            width="800"
+            height="450"
           />
 
           <!-- Enhanced Overlay -->
@@ -63,6 +65,8 @@
             alt="Private VIP Terminal Services"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
+            width="800"
+            height="450"
           />
 
           <!-- Enhanced Overlay -->
@@ -96,6 +100,8 @@
             alt="Premium Chauffeur Services"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
+            width="1200"
+            height="450"
           />
 
           <!-- Enhanced Overlay -->

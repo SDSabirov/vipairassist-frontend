@@ -43,18 +43,18 @@ export default defineNuxtConfig({
     public: {
       paypalClientId: process.env.PAYPAL_CLIENT_ID,
       API_BASE_URL: process.env.API_BASE_URL,
-      turnstileSiteKey: process.env.TURNSTILE_SITE_KEY
     },
   },
   googleFonts: {
     families: {
-      "Playfair+Display": [400, 500, 700],
-      "Open+Sans": [300, 400, 600], 
+      "Playfair+Display": [400, 700],
+      "Open+Sans": [400, 600],
     },
-    display: "swap", 
-    preload: true, 
+    display: "swap",
+    preload: true,
     preconnect: true,
     inject: true,
+    subsets: ['latin'],
   },
   css: ["~/assets/css/main.css", "boxicons/css/boxicons.min.css"],
   postcss: {
@@ -77,11 +77,6 @@ export default defineNuxtConfig({
                       })(window,document,'script','dataLayer','GTM-TFJP8PNX');`,
           type: 'text/javascript',
         },
-        {
-          src: 'https://challenges.cloudflare.com/turnstile/v0/api.js',
-          async: true,
-          defer: true,
-        }
       ],
     },
   },
