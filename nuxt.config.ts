@@ -67,6 +67,12 @@ export default defineNuxtConfig({
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
+      link: [
+        { rel: 'preconnect', href: 'https://d17rxfyqpsdnhy.cloudfront.net' },
+        { rel: 'dns-prefetch', href: 'https://d17rxfyqpsdnhy.cloudfront.net' },
+        { rel: 'preconnect', href: 'https://www.googletagmanager.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+      ],
       script: [
         {
           hid:'gtm',
@@ -92,8 +98,9 @@ export default defineNuxtConfig({
     Allow: "/", // Allow access to all other pages
   },
 
-  // Cache headers for CloudFront
+  // Cache headers and compression for CloudFront
   nitro: {
+    compressPublicAssets: true,
     routeRules: {
       // Static assets - cache for 1 year
       '/_nuxt/**': {
