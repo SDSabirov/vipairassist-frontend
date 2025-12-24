@@ -91,4 +91,40 @@ export default defineNuxtConfig({
     Disallow: "/admin", // Disallow access to admin pages
     Allow: "/", // Allow access to all other pages
   },
+
+  // Cache headers for CloudFront
+  nitro: {
+    routeRules: {
+      // Static assets - cache for 1 year
+      '/_nuxt/**': {
+        headers: {
+          'Cache-Control': 'public, max-age=31536000, immutable'
+        }
+      },
+      // Images - cache for 1 month
+      '/assets/images/**': {
+        headers: {
+          'Cache-Control': 'public, max-age=2592000, stale-while-revalidate=86400'
+        }
+      },
+      // Videos - cache for 1 month
+      '/assets/video/**': {
+        headers: {
+          'Cache-Control': 'public, max-age=2592000, stale-while-revalidate=86400'
+        }
+      },
+      // Fonts - cache for 1 year
+      '/**/*.woff2': {
+        headers: {
+          'Cache-Control': 'public, max-age=31536000, immutable'
+        }
+      },
+      // HTML pages - short cache with revalidation
+      '/**': {
+        headers: {
+          'Cache-Control': 'public, max-age=300, stale-while-revalidate=60'
+        }
+      }
+    }
+  },
 });

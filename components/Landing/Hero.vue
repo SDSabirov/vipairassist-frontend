@@ -147,13 +147,13 @@ const isMobile = ref(false);
 const imageLoaded = ref(false);
 const isHydrated = ref(false);
 
-// S3 video URLs
-const S3_VIDEO_DESKTOP = 'https://vip-air.s3.eu-central-1.amazonaws.com/mainvideo.webm';
-const S3_VIDEO_MOBILE = 'https://vip-air.s3.eu-central-1.amazonaws.com/mainvideo.mp4';
+// Video URLs (S3 direct - replace with CloudFront URLs when CDN is configured)
+const CDN_VIDEO_DESKTOP = 'https://vip-air.s3.eu-central-1.amazonaws.com/mainvideo.webm';
+const CDN_VIDEO_MOBILE = 'https://vip-air.s3.eu-central-1.amazonaws.com/mainvideo.mp4';
 
 // Select video source based on device
 const videoSrc = computed(() => {
-  return isMobile.value ? S3_VIDEO_MOBILE : S3_VIDEO_DESKTOP;
+  return isMobile.value ? CDN_VIDEO_MOBILE : CDN_VIDEO_DESKTOP;
 });
 
 const videoType = computed(() => {
