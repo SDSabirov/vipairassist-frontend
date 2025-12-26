@@ -18,8 +18,8 @@
       <!-- Airports Grid -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
         <div
-          v-for="(airport, index) in visibleAirports"
-          :key="index"
+          v-for="airport in visibleAirports"
+          :key="airport.code || airport.name"
           class="bg-white p-6 shadow-md rounded-md text-center border border-gray-300"
         >
           <h3 class="text-xl font-semibold text-gray-800">
@@ -45,7 +45,10 @@
 <script setup>
 import { ref, computed } from "vue";
 import axios from "~/api/drf";
+import { useApiCache } from "~/composables/useApiCache";
+
 const airports = ref([]);
+const { getCached, setCache } = useApiCache();
 
 const isExpanded = ref(false);
 
@@ -57,12 +60,19 @@ const toggleExpanded = () => {
   isExpanded.value = !isExpanded.value;
 };
 const fetchAirports = async () => {
+  const cacheKey = 'all-airports';
+  const cached = getCached(cacheKey);
+
+  if (cached) {
+    airports.value = cached;
+    loading.value = false;
+    return;
+  }
+
   try {
-    const response = await axios.get(
-      `all-airports/`
-    );
-    airports.value = response.data; 
-    console.log(airports)
+    const response = await axios.get(`all-airports/`);
+    airports.value = response.data;
+    setCache(cacheKey, response.data, 10 * 60 * 1000); // 10 min cache
   } catch (error) {
     console.error("Error fetching airport data:", error);
   } finally {

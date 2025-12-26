@@ -4,30 +4,31 @@
   >
     <!-- Background Media Container -->
     <div class="absolute inset-0 z-0">
-      <!-- Loading placeholder -->
-      <div 
+      <!-- Loading placeholder - absolute positioned to prevent CLS -->
+      <div
         v-if="!imageLoaded && !videoReady"
-        class="w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center"
+        class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center"
       >
         <div class="animate-pulse text-white/50">
           <div class="w-16 h-16 border-4 border-white/20 border-t-white/60 rounded-full animate-spin"></div>
         </div>
       </div>
 
-      <!-- Fallback Image - shows while video loads -->
+      <!-- Fallback Image - absolute positioned to prevent CLS -->
       <NuxtImg
         v-show="!videoReady"
         src="/assets/images/backgrounds/fasttracksign.webp"
         alt="Airport VIP Services - Premium Concierge Experience"
-        class="w-full h-full object-cover transition-opacity duration-700 ease-in-out"
+        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
         :class="{
           'opacity-0': videoReady,
           'opacity-100': !videoReady,
         }"
         loading="eager"
+        fetchpriority="high"
         width="1920"
         height="1080"
-        sizes="100vw sm:100vw md:100vw lg:100vw"
+        sizes="100vw"
         format="webp"
         quality="75"
         @load="onImageLoad"
@@ -164,13 +165,9 @@ const hideScrollHintOnScroll = () => {
   if (window.scrollY > 100) showScrollHint.value = false;
 };
 
-const handleScroll = () => {
-  const hero = document.querySelector(".h-screen");
-  const rect = hero.getBoundingClientRect();
-  if (rect.top <= window.innerHeight && rect.bottom >= 0) {
-    isVisible.value = true;
-  }
-};
+// Use ref for hero element to avoid DOM queries
+const heroRef = ref(null);
+let visibilityObserver = null;
 
 const onVideoReady = () => {
   videoReady.value = true;
@@ -197,14 +194,28 @@ onMounted(() => {
   // Mark as hydrated - enables video loading
   isHydrated.value = true;
 
-  window.addEventListener("scroll", handleScroll);
-  window.addEventListener("scroll", hideScrollHintOnScroll);
-  handleScroll(); // Run once
+  // Use IntersectionObserver instead of scroll handler to avoid forced reflows
+  visibilityObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        isVisible.value = true;
+      }
+    },
+    { threshold: 0.1 }
+  );
+
+  // Observe the hero section
+  const heroElement = document.querySelector(".h-screen");
+  if (heroElement) {
+    visibilityObserver.observe(heroElement);
+  }
+
+  window.addEventListener("scroll", hideScrollHintOnScroll, { passive: true });
 });
 
 onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
   window.removeEventListener("scroll", hideScrollHintOnScroll);
+  visibilityObserver?.disconnect();
 });
 </script>
 

@@ -188,14 +188,22 @@ const stopAutoplay = () => {
   clearInterval(autoplayInterval);
 };
 
+// Debounced resize handler to avoid forced reflows
+let resizeTimeout;
+const debouncedUpdateVisibleCards = () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(updateVisibleCards, 100);
+};
+
 onMounted(() => {
   updateVisibleCards();
-  window.addEventListener("resize", updateVisibleCards);
+  window.addEventListener("resize", debouncedUpdateVisibleCards, { passive: true });
   startAutoplay();
 });
 
 onUnmounted(() => {
-  window.removeEventListener("resize", updateVisibleCards);
+  window.removeEventListener("resize", debouncedUpdateVisibleCards);
+  clearTimeout(resizeTimeout);
   stopAutoplay();
 });
 </script>

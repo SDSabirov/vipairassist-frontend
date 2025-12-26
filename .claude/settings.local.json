@@ -8,7 +8,10 @@
       "Bash(xargs:*)",
       "Bash(del blog3.webp)",
       "Bash(move blog3_new.webp blog3.webp)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

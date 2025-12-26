@@ -23,8 +23,8 @@
     <!-- Simple Service Cards -->
     <div v-if="!loading" class="space-y-6">
       <div
-        v-for="(service, index) in services"
-        :key="index"
+        v-for="service in services"
+        :key="service.id"
         class="border-2 p-6 bg-white transition-all duration-300 hover:shadow-lg"
         :class="isServiceSelected(service) 
           ? 'border-green-500 bg-green-50' 
@@ -59,9 +59,9 @@
             <div class="mb-6">
               <h4 class="font-semibold text-gray-800 mb-3">What's included:</h4>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                <div 
-                  v-for="(line, index) in service.description.split('\n')" 
-                  :key="index"
+                <div
+                  v-for="(line, idx) in service.description.split('\n')"
+                  :key="`${service.id}-line-${idx}`"
                   class="flex items-center text-sm text-gray-700"
                 >
                   <i class="bx bx-check text-green-600 mr-2 flex-shrink-0"></i>

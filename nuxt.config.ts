@@ -3,6 +3,18 @@ import { resolve } from "path";
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
+
+  // Strip console statements in production for performance
+  vite: {
+    esbuild: {
+      drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
+    },
+  },
+
+  // Inline critical CSS to reduce render-blocking requests
+  experimental: {
+    inlineSSRStyles: true,
+  },
   alias: {
     "@": resolve(__dirname),
     "~": resolve(__dirname),
@@ -53,7 +65,8 @@ export default defineNuxtConfig({
     display: "swap",
     preload: true,
     preconnect: true,
-    inject: true,
+    download: true,        // Download fonts locally to avoid external requests
+    useStylesheet: false,  // Inline font-face declarations instead of external CSS
     subsets: ['latin'],
   },
   css: ["~/assets/css/main.css", "boxicons/css/boxicons.min.css"],

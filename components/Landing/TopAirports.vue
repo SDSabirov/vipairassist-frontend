@@ -46,8 +46,8 @@
       <div class="w-full max-w-7xl px-8 md:px-0">
         <div class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           <div
-            v-for="(item, index) in visibleItems"
-            :key="index"
+            v-for="item in visibleItems"
+            :key="item.code || item.link"
             class="transition-all duration-500 transform hover:scale-105"
           >
             <NuxtLink :to="`/airports/${item.link}`">
@@ -155,6 +155,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import axios from "~/api/drf";
+import { useApiCache } from "~/composables/useApiCache";
 
 // State
 const items = ref([]);
@@ -163,6 +164,7 @@ const imageLoaded = ref([]);
 const currentIndex = ref(0);
 const carouselRef = ref(null);
 const isCarouselVisible = ref(true);
+let observer = null;
 
 // Responsive card count
 const visibleCardCount = ref(1);
@@ -192,11 +194,25 @@ const updateVisibleCards = () => {
   }, 100);
 };
 
-// Fetch data
+// API Caching
+const { getCached, setCache } = useApiCache();
+
+// Fetch data with caching
 const fetchAirportData = async () => {
+  const cacheKey = 'top-airports';
+  const cached = getCached(cacheKey);
+
+  if (cached) {
+    items.value = cached;
+    imageLoaded.value = Array(cached.length).fill(false);
+    loading.value = false;
+    return;
+  }
+
   try {
     const response = await axios.get(`top-airports/`);
     items.value = response.data;
+    setCache(cacheKey, response.data, 10 * 60 * 1000); // 10 min cache
     imageLoaded.value = Array(response.data.length).fill(false);
   } catch (error) {
     console.error("Error fetching airport data:", error);
@@ -231,7 +247,7 @@ onMounted(() => {
   fetchAirportData();
   window.addEventListener("resize", updateVisibleCards);
 
-  const observer = new IntersectionObserver(
+  observer = new IntersectionObserver(
     ([entry]) => {
       isCarouselVisible.value = entry.isIntersecting;
       if (isCarouselVisible.value) startAutoplay();
@@ -245,5 +261,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", updateVisibleCards);
   stopAutoplay();
+  clearTimeout(resizeTimeout);
+  observer?.disconnect();
 });
 </script>

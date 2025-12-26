@@ -2,8 +2,12 @@
   <div class="font-serif">
     <NuxtLayout>
        <NuxtPage />
-       <Whatsapp/>
-       <CookieConsent/>
+       <ClientOnly>
+         <LazyWhatsapp />
+       </ClientOnly>
+       <ClientOnly>
+         <LazyCookieConsent />
+       </ClientOnly>
     </NuxtLayout>
   </div>
 </template>
