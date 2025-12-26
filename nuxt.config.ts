@@ -139,6 +139,12 @@ export default defineNuxtConfig({
           'Cache-Control': 'public, max-age=31536000, immutable'
         }
       },
+      // SVG files in public folder - cache for 1 year
+      '/*.svg': {
+        headers: {
+          'Cache-Control': 'public, max-age=31536000, immutable'
+        }
+      },
       // HTML pages - short cache with revalidation
       '/**': {
         headers: {
